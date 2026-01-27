@@ -77,19 +77,14 @@ Between meeting 1 last Tuesday and meeting 2 this Thursday, I want to have compl
     \item Ran cookbook codes
 \end{itemize}
     \begin{itemize}
-        \begin{itemize}
             \item Location: /Users/gracetait/shproject/meer21cm/docs/source/cookbook
         \end{itemize}
-    \end{itemize}
     \begin{itemize}
         \begin{itemize}
-            \item Found the theory and data analysis code. Didn't run the data analysis code because I don't have any data to run yet and didn't run the mock recipes either. Ran the theory recipes below.
+            \item Found the theory and data analysis code. Didn't run the data analysis code because I don't have any data to run yet and didn't run the mock recipes either. Ran the theory recipes below. Didn't really dive too deep with these codes though but I know they will be useful later. Just used this to get a grasp on navigating through meer21cm package I think.
         \end{itemize}
     \end{itemize}
     \begin{itemize}
-        \begin{itemize}
-            \item \color{red} Write up summaries of these codes
-        \end{itemize}
         \begin{itemize}
             \begin{itemize}
                 \item Effect of weights in the power spectrum estimator and the modelling
@@ -106,15 +101,79 @@ Between meeting 1 last Tuesday and meeting 2 this Thursday, I want to have compl
                 \item Adding observational effects in your model power spectrum \color{black}
             \end{itemize}
         \end{itemize}
+        
     \item Ran notebook 1 code and completed the task
     \begin{itemize}
         \item This notebook generates a neutral hydrogen map from theory. 
-        \item A function "MockSimulation" is called, you input coordinate ranges and a seed which is used to generate the simulation. Plotting this using "\texttt{plot\_map}" gives an image of the survey area and frequency range. The frequency range gives the cosmological redshift.
-        \item We can generate some input to put into the model and this can be plotted using "\texttt{plot\_map}" again.
-        \item The information we want to extract from this map is the power spectrum which tells us how matter distributes in the Universe. 
-        \item The power spectrum can be obtained using a function and then we average the power spectrum into a 1D spectrum which we can compare with the input theory and plot on a graph.
+        \item A function "MockSimulation" is called, you input coordinate ranges and a seed which is used to generate the simulation. Plotting this using "\texttt{plot\_map}" gives an image of the survey area and frequency range. The frequency range gives the cosmological redshift. This can be seen in Figure 1.
+
+                        \begin{figure}[hbt!]
+            \centering
+            \includegraphics[width=0.5\linewidth]{outputs//week2/frequency_vs_redshift.pdf}
+            \caption{Frequency versus redshift.}
+            \label{fig:placeholder}
+        \end{figure}
+        
+        \item We can generate some input to put into the model and this can be plotted using "\texttt{plot\_map}" again. The survey area before and after generating some input can be seen in Figures 2 and 3.
+
+        \begin{figure}[hbt!]
+            \centering
+            % Left Side: Empty Map
+            \begin{minipage}{0.4\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{outputs/week2/empty_hydrogen_map.pdf}
+                \caption{This is the survey area without any input.}
+                \label{fig:empty_map}
+            \end{minipage}
+            \hfill % This pushes the two minipages to the far left and right
+            % Right Side: Hydrogen Signal Map
+            \begin{minipage}{0.4\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{outputs/week2/hydrogen_map.pdf}
+                \caption{This is the survey area but it does not reflect the real observation. It is just the 21cm signal.}
+                \label{fig:hydrogen_signal}
+            \end{minipage}
+        \end{figure}
+
+        \item The information we want to extract from this map is the power spectrum which tells us how matter distributes in the Universe. This can be seen in Figure 4.
+
+        \begin{figure}[hbt!]
+            \centering
+            \includegraphics[width=0.4\linewidth]{outputs//week2/power_spectrum_from_hydrogen_map.pdf}
+            \caption{The power spectrum from the input data which tells us about how matter distributes in the Universe.}
+            \label{fig:placeholder}
+        \end{figure}
+
+        \item The power spectrum can be obtained using a function and then we average the power spectrum into a 1D spectrum which we can compare with the input theory and plot on a graph. This plot can be seen in Figure 5.
+
+        \begin{figure}[hbt!]
+            \centering
+            % Left: Single Realization
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{outputs/week2/1D_power_spectrum_neutral_hydrogen_map_1_realisations.pdf}
+                \caption{1D power spectrum with the input theory and mock data over-plotted. This was ran for just one realisation.}
+                \label{fig:power_spec_single}
+            \end{minipage}
+            \hfill
+            % Right: Placeholder for the 100 realizations plot
+            \begin{minipage}{0.48\textwidth}
+                \centering
+                % Replace 'example-image' with your new 100-realization plot filename
+                \includegraphics[width=\linewidth]{outputs//week2/1D_power_spectrum_neutral_hydrogen_map_100_realisations.pdf} 
+                \caption{1D power spectrum with the input theory and mock data over-plotted. This was ran for 100 realisations, with the error bars being the standard deviations.}
+                \label{fig:power_spec_multi}
+            \end{minipage}
+        \end{figure}
+        
         \item Task: All of the described above is one realization of the mock which is simulated using a set seed. Write a function which will take in a seed value and return data. Plot this on a graph comparing the mock and theory with the standard deviation of the 100 realizations as the error bars. 
-        \item \color{red} summary of what i did and image of output \color{black}
+        
+        \item I found doing this task to go pretty well. All of the code was already written so I jsut complied it into a function with took in different seeds. And then I generated an array of integers from 1 to 100 and then passed in each value into the function using a loop, saving the output into a list. I then took the mean and standard deviation and plotted them.
+
+        \item The result of this function and this task can be seen in Figure 6.
+
+        \item I also created a function which helps me save different plots to certain folders in my senior honours directory. It takes in the plot, week number (so I can save the image depending on which week I am in for my project, and the name I want to give my image). It has helped speed up the image saving process!
+        
     \end{itemize}
 \end{itemize}
 
@@ -122,7 +181,6 @@ Between meeting 1 last Tuesday and meeting 2 this Thursday, I want to have compl
 
 \subsubsection{Meeting 2: Zhaoting and Alkistis (Zoom)}
 
-\begin{itemize}
     \item Discussed any questions I had on the papers
     \begin{itemize}
         \item I didn't manage to read all of the papers since it took a bit longer than I anticipated since I was researching anything I didn't understand and there was a decent amount I didn't understand. 
