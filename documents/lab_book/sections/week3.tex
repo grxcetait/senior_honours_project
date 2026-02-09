@@ -13,13 +13,12 @@
 \begin{itemize}
     \item I got sent notebook 2 to work on this week. This notebook follows on from notebook 1, which generates a neutral hydrogen map, and adds a foreground to the map. The notebook takes me through the steps on removing the foreground and its effects on the power spectrum.
     \item After adding the foreground to the map, which is done by simulating the signal and foreground separately and adding them together, we can see the difference between the map before and after the foreground has been added. This can be seen in Figure 7 and 8.
-
 \begin{figure}[htb!]
     \centering
     % Left side image
     \begin{minipage}{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{outputs/week3/hydrogen_map_w_foreground.pdf}
+        \includegraphics[width=\linewidth]{hydrogen_map_w_foreground.pdf}
         \caption{Hydrogen map with foregrounds.}
         \label{fig:map_w_foreground}
     \end{minipage}
@@ -27,7 +26,7 @@
     % Right side image
     \begin{minipage}{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{outputs/week3/hydrogen_map_wo_foreground.pdf}
+        \includegraphics[width=\linewidth]{hydrogen_map_wo_foreground.pdf}
         \caption{Hydrogen map without foregrounds.}
         \label{fig:map_wo_foreground}
     \end{minipage}
@@ -129,7 +128,7 @@
     % Linear Plot
     \begin{minipage}{0.4\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{outputs/week3/1d_power_spectrum_0_0.1.pdf}
+        \includegraphics[width=\linewidth]{outputs/week3/1d_power_spectrum_[0, 0.1]_None.pdf}
         \caption{Comparing the 1D power spectrum before and after foreground removal on a linear scale with 100 realisations, with minimum k\_perp of 0 and minimum k\_para of 0.1.}
         \label{fig:pspec_lin_0_01}
     \end{minipage}
@@ -137,7 +136,7 @@
     % Log Plot
     \begin{minipage}{0.4\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{outputs/week3/1d_log_power_spectrum_0_0.1.pdf}
+        \includegraphics[width=\linewidth]{outputs/week3/1d_log_power_spectrum_[0, 0.1]_None.pdf}
         \caption{Comparing the 1D power spectrum before and after foreground removal on a logarithmic scale with 100 realisations, with minimum k\_perp of 0 and minimum k\_para of 0.1.}
         \label{fig:pspec_log_0_01}
     \end{minipage}
@@ -181,7 +180,7 @@
     \end{minipage}
 \end{figure}
 
-https://www.overleaf.com/project\begin{figure}[htb!]
+\begin{figure}[htb!]
     \centering
     % Log Plot
     \begin{minipage}{0.4\textwidth}
@@ -246,3 +245,27 @@ Also discussed notebook 2
     \item K is the x, y, z coordinates added in quadrature. K para is the x and y, k perp is the z coordinates. K para and perp can be seen as the fourier transform of the x, y, z coordinates. X, y coordinates are the are the sky coordinates and the z coordinates are related to the frequency.
     \item Next time: gain a bit more of an intuitive understanding of the maths and stuff behind this code. Understand more on what k para really represents. Why is it important and why does remove the small values make such a difference on the code?
 \end{itemize}
+
+\subsection{Saturday 31st January}
+
+\begin{itemize}
+    \item Today, I just updated by lab book and put in the plots I created from this week. I need to make sure to stay up to date on my lab book so I remember everything I did. Ideally, I would update my lab book as I go but sometimes I forget. Bare minimum, I need to make sure my lab book is up to date by the end of the week.
+    \item For next week, I need to gain a more intuitive understanding of what k para is and why is it significant.
+    \begin{itemize}
+        \item When taking measurements, we use the x, y, z co-ordinates. When we take the Fourier Transform of these coordinates, we get k-space.
+        \begin{itemize}
+            \item Fourier transform moves between real space and Fourier space. In real space, it is difficult to see the total signal since it is just a lot of "wiggles." In Fourier space, it is easier to see the signal since we see a spike for every frequency that exists in that signal.
+        \end{itemize}
+        \item  K perpendicular comes from the x and y co-ordinates on the sky and represents the spatial scales across the sky. Small values represent large structures and large values represent small structures.
+        \item K parallel comes from the z co-ordinate. In 21cm cosmology, this is directly mapped to frequency. Different distances corresponds to different redshift which shift the 21cm line to different observed frequencies. 
+        \item So, large k para represents very rapid fluctuations in frequency. This is where the HI signal is. Small k para represents very smooth changes over a wide range of frequencies. This is the foreground signal.
+    \end{itemize}
+\item Lower order modes are smoother. As they get larger, they become "wigglier" in shape. Lower order modes have larger eigenvalues. 
+\item In linear algebra, an eigenvector is a vector that doesn't change direction when a matrix is applied to it, it just gets scaled by the eigenvalue. So, the eigenvalues tell us the strength/power of a specific patterns and the eigenfunctions/modes tells us the shape of that pattern in k-space.
+\begin{itemize}
+    \item So, large eigenvalues/small modes represent small k which correspond to the foregrounds.
+    \item Small eigenvalues/large modes represent large k which correspond to the foregrounds.
+    \item So, by removing the first few smallest modes, this removes the largest eigenvalues which have the highest strength/power in the signal. This is as expected as the foreground is 4 order of magnitude larger than our signal. 
+\end{itemize}
+\end{itemize}
+
