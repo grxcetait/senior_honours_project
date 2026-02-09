@@ -35,6 +35,20 @@ To do before Monday:
 
 Sunday 8th February
 
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{outputs//week4/eigenvalues.pdf}
+    \caption{Eigenvalues of the total signal. We can see the first 3 [0, 1, 2] modes are very large and then it plateaus. These correspond to the foregrounds.}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{outputs//week4/eigenvectors.pdf}
+    \caption{Eigenvectors of the total signal. We can see the first 2 [0, 1] modes are very smooth and linear which is expected from the foreground signal. The rest of the modes [3-9] become increasingly "wiggly" which represent higher frequency fluctuations.}
+    \label{fig:placeholder}
+\end{figure}
+
 Instructions from an email sent on Thursday which has different code snippets
 
 \begin{itemize}
@@ -74,5 +88,61 @@ Working more on notebook 2 and doing what was mentioned during Thursday's meetin
 
 \begin{itemize}
     \item Extract the eigenvectors and try to understand what it shows and why it's significant
-    \item Plot the cylindrical power spectrum for the foreground noise and Gaussian noise and try to understand what is shows and why it's significant
+    \begin{itemize}
+        \item The plot of the eigenvalues can be seen in Figure 25. This was generated last week but is shown here again for better compare with the eigenvector plots.
+        \begin{itemize}
+            \item We can see the first 3 [0, 1, 2] modes are very large and then it plateaus. These correspond to the foregrounds.
+            \item This plot shows us how much power a component has.
+        \end{itemize}
+        \item The plot of the eigenvectors can be seen in Figure 26. 
+        \begin{itemize}
+            \item We can see the first 2 [0, 1] modes are very smooth and linear which is expected from the foreground signal. This is because the synchrotron radiation is very bright and vary very slowly across frequency.
+            \item The rest of the modes [3-9] become increasingly "wiggly" which represent higher frequency fluctuations.
+            \item This plot shows us what the power/mode looks like across the frequency ranges.
+            \item These very wiggly lines are much lower in magnitude than the foregrounds and vary a lot from frequency-to-frequency.
+        \end{itemize}
+    \end{itemize}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{outputs//week4/cylindrical_power_spectrum_hi_map.pdf}
+    \caption{The cylindrical power spectrum of the HI signal.}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{outputs//week4/cylindrical_power_spectrum_fg_map.pdf}
+    \caption{The cylindrical power spectrum of the foreground.}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{outputs//week4/cylindrical_power_spectrum_noise_map.pdf}
+    \caption{The cylindrical power spectrum of the noise. }
+    \label{fig:placeholder}
+\end{figure}
+    
+    \item Plot the cylindrical power spectrum for the foreground noise and Gaussian noise and try to understand what is shows and why it's significant.
+    \begin{itemize}
+        \item The cylindrical power spectrum of the HI signal (generated last week) can be seen in Figure 27.
+        \begin{itemize}
+            \item After foreground removal shows a significant drop in power.
+            \item The ratio plot shows the most signal loss occurs at low k para. 
+            \item This is because the HI signal has some large-scale structures that is smooth which partially overlaps with the foreground modes. When PCA removes the first few eigenvectors, it cannot distinguish between smooth foregrounds and smooth HI signal.
+        \end{itemize}
+        \item The cylindrical power spectrum of the foreground can be seen in Figure 28.
+        \begin{itemize}
+            \item Before removal, the power is almost entirely concentrated at low k para which is expected as it represents the smoothness of the foreground.
+            \item After foreground removal, the plot is almost completely dark showing that the PCA modes that were selected and removed match the foreground shapes well.
+            \item The red region at high k in the ratio map suggests that while most of the power was removed, small-scale residuals or noise might still remain.
+        \end{itemize}
+        \item The cylindrical power spectrum of the noise can be seen in Figure 29.
+        \begin{itemize}
+            \item This was done by generating Gaussian white noise which represents the thermal noise of the instrument.
+            \item The noise power spectrum is relatively uniform across the entire k para k perp plane. This is what is expected from white thermal noise.
+            \item However, the after foreground removal and ratio plots look very similar to the HI signal plots. This suggests that PCA treats noise and HI signal similarly. So it removes any power that overlap with the first few foreground eigenvectors.
+        \end{itemize}
+    \end{itemize}
 \end{itemize}
