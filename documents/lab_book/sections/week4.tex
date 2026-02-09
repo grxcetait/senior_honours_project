@@ -32,3 +32,47 @@ To do before Monday:
         \item Plot the cylindrical power spectrum for the foreground noise and gaussian noise and try to understand what it shows and why it's significant.
     \end{itemize}
 \end{itemize}
+
+Sunday 8th February
+
+Instructions from an email sent on Thursday which has different code snippets
+
+\begin{itemize}
+    \item Some stuff you can plug into the previous notebook. In the previous notebook there is this part:
+    \begin{itemize}
+        \item tot\_map = hi\_map + fg\_map
+        \item cov\_matrix, \_, eigen\_values, \_, = pca\_clean(tot\_map,1,weights=mock.w\_HI,return\_analysis=True,mean\_center=True)
+    \end{itemize}
+\item You can change that to:
+\begin{itemize}
+    \item sigma\_noise = 1.21 * 1e-3
+    \item noise\_map = np.random.default\_rng(mock.seed).normal(0,sigma\_noise,hi\_map.shape) * mock.w\_HI
+    \item tot\_map = hi\_map + fg\_map + noise\_map
+    \item cov\_matrix, \_, eigen\_values, eigen\_vectors, = pca\_clean(tot\_map,1,\textit{weights}=mock.w\_HI,\textit{return\_analysis}=True,\textit{mean\_center}=True)
+    \item \textit{\# plot the first 10 eigenvectors}
+    \item fig,axes = plt.subplots(10,1,\textit{figsize}=(10,8))
+    \item \textit{for} i \textit{in} range(10):
+    \item axes[i].plot(eigen\_vectors[:,i])
+    \item plt.show()
+\end{itemize}
+\item Here I am doing two things, adding in a noise component and also plotting the eigenvectors.
+\item Later in the notebook there is this part:
+\begin{itemize}
+    \item mock.data = hi\_map
+    \item mock.grid\_data\_to\_field();
+    \item power\_cy\_hi,\_ = mock.get\_cy\_power(mock.auto\_power\_3d\_1)
+    \item power\_1d\_hi,k\_1d,nmodes\_1d = mock.get\_1d\_power(mock.auto\_power\_3d\_1)
+    \item mock.data = res\_map
+    \item mock.grid\_data\_to\_field();
+    \item power\_cy\_res,\_ = mock.get\_cy\_power(mock.auto\_power\_3d\_1)
+    \item power\_1d\_res,k\_1d,nmodes\_1d = mock.get\_1d\_power(mock.auto\_power\_3d\_1)
+\end{itemize}
+\item Simply change the input data to fg\_map or noise\_map and you can calculate the foreground power and noise power.
+\end{itemize}
+
+Working more on notebook 2 and doing what was mentioned during Thursday's meeting
+
+\begin{itemize}
+    \item Extract the eigenvectors and try to understand what it shows and why it's significant
+    \item Plot the cylindrical power spectrum for the foreground noise and Gaussian noise and try to understand what is shows and why it's significant
+\end{itemize}
