@@ -105,7 +105,7 @@ Working more on notebook 2 and doing what was mentioned during Thursday's meetin
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.8\linewidth]{outputs/week3/cylindrical_power_spectrum_None_None.pdf}
+    \includegraphics[width=0.8\linewidth]{outputs/week4/cylindrical_power_spectrum_hi_map.pdf}
     \caption{The cylindrical power spectrum of the HI signal.}
     \label{fig:placeholder}
 \end{figure}
@@ -142,7 +142,8 @@ Working more on notebook 2 and doing what was mentioned during Thursday's meetin
         \begin{itemize}
             \item This was done by generating Gaussian white noise which represents the thermal noise of the instrument.
             \item The noise power spectrum is relatively uniform across the entire k para k perp plane. This is what is expected from white thermal noise.
-            \item However, the after foreground removal and ratio plots look very similar to the HI signal plots. This suggests that PCA treats noise and HI signal similarly. So it removes any power that overlap with the first few foreground eigenvectors.
+            \item The after foreground removal looks very similar to the HI power spectrum after foreground removal. 
+            \item The ratio plot looks almost reversed in comparison to the HI signal ratio. Suggesting signal loss occurs everywhere except low k para and low k perp?
         \end{itemize}
     \end{itemize}
 \end{itemize}
