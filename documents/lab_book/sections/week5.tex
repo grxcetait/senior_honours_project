@@ -22,9 +22,40 @@
 \end{itemize}
     
 % source: https://arxiv.org/abs/1504.07527
-        \begin{figure}
+        \begin{figure}[hbt!]
             \centering
             \includegraphics[width=0.5\linewidth]{image.png}
             \caption{Eigenvectors plot from a real data analysis paper}
             \label{fig:placeholder}
         \end{figure}
+
+\subsection{Wednesday 11th February}
+
+To-do list for today (and/or the rest of the week):
+\begin{itemize}
+    \item I will try to get as much of the following done:
+    \item Update lab book with meeting notes from yesterday
+    \item Look at code for the cylindrical power spectrum and try to understand the issue. Also try to fix it and do the correct plots.
+    \item Download the new GPR notebook and have a look. 
+    \item And make notes in my lab book on any of the tasks completed.
+\end{itemize}
+
+What I ended up getting done today:
+
+\begin{itemize}
+    \item I updated my lab book with meeting notes from yesterday. I wrote down almost everything from memory so hopefully it was all correct.
+    \item I also had another look at the code for the cylindrical power spectrum to try to understand what was wrong but didn't really understand. So I sent Zhaoting and Alkistis an email asking about this again. However, since Zhaoting has a flight and is away for the next week or so I don't expect a reply from him.
+\end{itemize}
+
+\subsection{Thursday 12th February}
+
+\begin{itemize}
+    \item I got a reply from Alkistis on my concerns with the plot and since she wasn't there for the beginning of our meeting on Tuesday I don't think she fully understands. I will follow up with Zhaoting once he becomes avaliable
+    \item Alkistis suggested taking some other routes to understand PCA 
+    \begin{itemize}
+        \item Think about what an actual experiment sees (which is HI signal + foregrounds + noise) and I can add them up and perform PCA on the total. Since at the moment I am just going HI signal + foreground.
+        \item Or I can just focus on HI signal + foreground since that's the main reason PCA is used.
+        \item I can also study how the residuals look after removing 1, 2, 3, etc PCA modes. In principle, removing only 1 mode is not enough to "clean" the foregrounds, and 3 is probably already over cleaning a bit. But the cleaning is also scale dependent, as we discussed small k\_parallel are affected more. How do the residuals look like if I perform this test?
+    \end{itemize}
+\item I also got given a link to a paper by Zhaoting that uses PCA and the cylindrical power spectrum which would be useful to read and focus on the PCA sections: https://arxiv.org/pdf/2205.07776 
+\end{itemize}
