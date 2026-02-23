@@ -1,0 +1,112 @@
+\documentclass[
+    a4paper, % Paper size, use either a4paper or letterpaper
+    10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
+    unnumberedsections, % Comment to enable section numbering
+]{LTJournalArticle}
+
+\usepackage{subfig} % grace added this to add plots in side by side! sorry didn't know where else to put it. feel free to move / remove
+\usepackage{amsmath}
+\usepackage{cleveref}
+
+\runninghead{Sting Operation: WASP-135b in Transit} % A shortened article title to appear in the running head, leave this command empty for no running head
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\epsfxsize=40mm                         % Size of crest
+\thispagestyle{empty} % This removes the running head from the top corner
+\begin{minipage}[b]{110mm}
+        {\Huge\bf School of Physics \\and Astronomy
+        \vspace*{17mm}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{40mm}               
+        \makebox[40mm]{
+        \includegraphics[width=40mm]{figures/UoEcrest.pdf}}
+\end{minipage}
+\par\noindent                                           % Centre Title, and name
+\vspace*{2cm}
+\begin{center}
+        \huge\bf All the Buzz: Characterising WASP-135b Using Transit Photometry
+\end{center}
+\vspace*{1cm}
+\begin{center}
+        \bf 
+        \large
+        Holley Conte, Reggie Dunsdon, Kayleigh Innes, Connor Kennedy, \\
+        Siddhant Pujni, and Grace Tait\\
+        \vspace{0.5cm}
+        February 2026                         % Submission Date
+\end{center}
+\vspace*{5mm}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+
+                                         
+\begin{abstract}
+Here we present ground-based transit photometry on WASP-135b using the Physics Innovations Robotic Astronomical Telescope Explorer (PIRATE). The observations were reduced using standard CCD procedures, including bias subtraction and flat field correction, which were then used in differential photometry. Airmass correction was performed on reduced data to determine the true magnitudes of WASP-135b. By performing colour analysis and dust extinction, we determine the host star has a stellar classification of K2. By modelling the light curve using the \texttt{batman} package we extract key system parameters to report WASP-135b has radius $1.15(3)\text{ $R_\text{{Jup}}$}$, mass $1.65(4)\text{ $M_\text{{Jup}}$}$, transit depth $0.0217(9)$, and transit duration $0.066(2)\text{ days}$.
+%\big(\frac{R_p}{R_\star}\big)^2 
+\end{abstract}
+
+
+\vspace*{1cm}
+
+\vspace*{3cm}
+
+\vfill
+\begin{center}
+    {\bf Supervisor:} Dr. Trent Dupuy                % Change to suit
+\end{center}
+ \newpage
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\newpage
+\thispagestyle{empty} % This removes the running head from the top corner
+\tableofcontents
+\date{}
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\setcounter{page}{1} % Set this page as the first numbered page
+
+% Main sections 
+\input{sections/01_introduction}    
+\input{sections/02_background}      
+\input{sections/03_methodologies}     
+\input{sections/04_results}        
+\input{sections/05_discussion}     
+
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	 REFERENCES
+%----------------------------------------------------------------------------------------
+% Apparently we should use %\autocite{} instead of \cite{} it makes citations format better.
+
+\newpage
+\renewcommand{\refname}{Bibliography}
+\addcontentsline{toc}{section}{Bibliography}
+% \bibliographystyle{plain}
+\printbibliography
+
+\appendix
+\addcontentsline{toc}{section}{Appendix}
+\input{appendices/Appendix A}
+\input{appendices/Appendix B}
+\newpage
+\input{appendices/Appendix C}
+%----------------------------------------------------------------------------------------
+
+\end{document}
