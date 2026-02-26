@@ -1,1 +1,54 @@
 \section{Week 6: 23rd February - 1st March 2026}
+
+Early this week Zhaoting send some code in Notebook 4 clearing up some confusion with the cylindrical power spectra for HI spectrum, foreground and noise. I haven't had a chance to look at any of that yet. My main focus for this week is to work on the draft 5 page report which is due on Friday. Then, I will work on Notebook 4 and anything else this weekend and the beginning of next week leading up to our next Thursday meeting.
+
+\section{Thursday 26th February}
+
+\subsubsection{Meeting 6: Zhaoting (Zoom) and Alkistis}
+
+\begin{itemize}
+    \item First, we discussed what I have so far for the draft 5 page report which is due tomorrow.
+    \begin{itemize}
+        \item I showed the structure I had so far which was Introduction, Simulated Dataset, Foreground Removal Methods (with PCA and GPR as subsections), Methodology (with PCA and GPR as subsections again), Results, Discussion, Conclusion.
+        \item The overall structure looks fine so far. If anything doesn't work, they can just give me feedback when I submit it. Any feedback on this draft report will be given by the end of next week.
+        \item I don't have to fill out 5 whole pages. I can just do 3 or 4. It's more important to have a few pages which are to a good quality over 5 pages which are not.
+        \item It's good that I have a little bit of everything so far. Make sure to include a bit for the methodology, results, discussion and conclusion. Most students lose a bit of marks on the discussion so it is important to have a go with that. Also, make sure to include some references just so they can check if it is correct.
+        \item I asked about how many plots is too many plots. Essentially, it is difficult to have too many plots. However, it is important to make sure that every plot shown in the report has meaning and tells the reader something and is described properly.
+        \item I asked about how in detail for the "Foreground Removal Methods" for PCA and GPR I should be. Comparing to the main GPR paper which has a small section on PCA, it should be a bit more in detail than that. I should be able to explain it in a way that someone who has no idea what it is should be able to understand it. I should explain PCA and the reason behind each thing that is done.
+        \item I also asked if it is okay I have a "Simulated Dataset" section. Because a dataset is simulated for both PCA and GPR so it makes sense to have a separate section for this so I don't repeat myself. I can also talk more in depth about what each component of the signals are. They said this was fine.
+    \end{itemize}
+\item Discussed Notebook 3 which looked at different kernals for GPR.
+\begin{itemize}
+    \item I said how there was an error with optimize.fmin so I used optimize.minimize instead. I used bounds and found that the foreground signal component kept on growing whenever I made the bounds larger and this is as expected I think?
+    \item Zhaoting mentioned there was something not quite right in the power spectra produced. There is still a lot of residual foreground which needs to be removed. This can be seen in both the 1D and cylindrical power spectra. 
+    \item This is either a value issue or optimisation issue. Try to find different methods which will make this work better. Either a different optimisation function or ...
+    \item The difference between optimize.fmin and optimize.miminize is that optimize.fmin find the local minimum whereas optimize.minimize finds the global minimum. Maybe try to find an optimisation routine that does something different and see how that works?
+\end{itemize}
+\item Also, went over the cylindrical power spectrum for the HI signal, foreground and noise which I had some confusion over the last couple of weeks.
+\begin{itemize}
+    \item Essentially, for all three signals I plot the total signal with the foreground removed each time (seen in the middle plots). This is not a useful comparison for these three signals. Instead, for example for the foreground, I should plot the residual foreground (the foreground signal after the foreground has been removed). For the noise, I should plot the residual noise (the noise signal after the noise has been removed). This is to compare how much of a certain signal has been removed after foreground has been removed. Because there will be some overlap and signal loss when foreground removal has been done.
+\end{itemize}
+\end{itemize}
+
+To-do list:
+
+\begin{itemize}
+    \item Focus on draft 5 page report due tomorrow. 
+    \begin{itemize}
+        \item Make sure to add some key results (cylindrical and 1D power spectrum maybe?) to the results section. Make sure also to have a good go at the discussion. 
+        \item Also think it would be good to have the covariance for the total signal, HI signal, foreground and noise in the "Simulated Dataset" section and describe what is being seen. Highlight how the frequency structures are different and are at different magnitudes.
+        \item Make sure to also sort out references!
+    \end{itemize}
+\item After draft report is submitted, before next Thursday meeting:
+\begin{itemize}
+    \item Sort out cylindrical power spectrum graphs for HI signal, foregrounds and noise.
+\end{itemize}
+\begin{itemize}
+    \begin{itemize}
+        \item Have a look at Notebook 4 which is related to this.
+    \end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Have another go at Notebook 3.
+\end{itemize}
+\end{itemize}

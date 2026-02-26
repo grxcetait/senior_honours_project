@@ -4,11 +4,12 @@
     unnumberedsections, % Comment to enable section numbering
 ]{LTJournalArticle}
 
-\usepackage{subfig} % grace added this to add plots in side by side! sorry didn't know where else to put it. feel free to move / remove
+\usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{cleveref}
+\usepackage{stfloats}
 
-\runninghead{Sting Operation: WASP-135b in Transit} % A shortened article title to appear in the running head, leave this command empty for no running head
+%\runninghead{Sting Operation: WASP-135b in Transit} % A shortened article title to appear in the running head, leave this command empty for no running head
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -29,14 +30,13 @@
 \par\noindent                                           % Centre Title, and name
 \vspace*{2cm}
 \begin{center}
-        \huge\bf All the Buzz: Characterising WASP-135b Using Transit Photometry
+        \huge\bf Data Science Techniques Applied To Cosmology
 \end{center}
 \vspace*{1cm}
 \begin{center}
         \bf 
         \large
-        Holley Conte, Reggie Dunsdon, Kayleigh Innes, Connor Kennedy, \\
-        Siddhant Pujni, and Grace Tait\\
+        Grace Tait\\
         \vspace{0.5cm}
         February 2026                         % Submission Date
 \end{center}
@@ -49,8 +49,7 @@
 
                                          
 \begin{abstract}
-Here we present ground-based transit photometry on WASP-135b using the Physics Innovations Robotic Astronomical Telescope Explorer (PIRATE). The observations were reduced using standard CCD procedures, including bias subtraction and flat field correction, which were then used in differential photometry. Airmass correction was performed on reduced data to determine the true magnitudes of WASP-135b. By performing colour analysis and dust extinction, we determine the host star has a stellar classification of K2. By modelling the light curve using the \texttt{batman} package we extract key system parameters to report WASP-135b has radius $1.15(3)\text{ $R_\text{{Jup}}$}$, mass $1.65(4)\text{ $M_\text{{Jup}}$}$, transit depth $0.0217(9)$, and transit duration $0.066(2)\text{ days}$.
-%\big(\frac{R_p}{R_\star}\big)^2 
+The LHCb experiment at CERN investigates charge-parity (CP) violation to better understand the observed matter-antimatter asymmetry in the Universe. Its Ring Imaging Cherenkov (RICH) detectors identify charged particles using Cherenkov radiation, but the higher luminosity planned for Upgrade II requires new detector configurations which can maintain performance under the harsh conditions. Two critical benchmarks are defined: an overall Cherenkov angle resolution better than 0.5\,mrad and an occupancy below 30\,\%. This study simulated 24 detector configurations, investigating contributions of emission point, chromatic dispersion, and pixel size on the resolution. Six configurations achieved the resolution benchmark, and two were selected for detail occupancy studies. Of these, only the configuration using an LAPPD photodetector with a 250\,nm wavelength cut-off and 1.4\,mm pixel size satisfied both benchmarks. 
 \end{abstract}
 
 
@@ -78,15 +77,19 @@ Here we present ground-based transit photometry on WASP-135b using the Physics I
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
-
 \setcounter{page}{1} % Set this page as the first numbered page
+\twocolumn
 
 % Main sections 
-\input{sections/01_introduction}    
-\input{sections/02_background}      
-\input{sections/03_methodologies}     
-\input{sections/04_results}        
-\input{sections/05_discussion}     
+\input{documents/lab_report/sections/01_introduction}
+\input{documents/lab_report/sections/02_simulated_dataset}
+\input{documents/lab_report/sections/03_foreground_removal_methods}
+\input{documents/lab_report/sections/04_methodology}
+%\input{documents/lab_report/sections/03_principal_component_analysis}
+%\input{documents/lab_report/sections/04_gaussian_process_regression}
+\input{documents/lab_report/sections/05_results}
+\input{documents/lab_report/sections/06_discussion}
+\input{documents/lab_report/sections/07_conclusion}
 
 %------------------------------------------------
 
@@ -103,10 +106,9 @@ Here we present ground-based transit photometry on WASP-135b using the Physics I
 
 \appendix
 \addcontentsline{toc}{section}{Appendix}
-\input{appendices/Appendix A}
-\input{appendices/Appendix B}
+\input{documents/lab_report/appendices/appendix_a}
+\input{documents/lab_report/appendices/appendix_b}
 \newpage
-\input{appendices/Appendix C}
 %----------------------------------------------------------------------------------------
 
 \end{document}
