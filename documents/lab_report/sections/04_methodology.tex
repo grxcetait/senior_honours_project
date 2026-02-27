@@ -4,9 +4,9 @@
 
 % https://www.aanda.org/articles/aa/full_html/2025/11/aa53461-24/aa53461-24.html
 
-By generating mock data from theory using meer21cm, a HI IM was generated for a total signal consisting of the 21\,cm signal and the foregrounds. This data was generated using a fixed seed for random number generation, producing a specific outcome of a stochastic model known as a realisation.
+By generating mock data from theory using meer21cm, a HI IM was generated for a total signal consisting of the 21\,cm signal and the foregrounds. This data was generated using a fixed seed for random number generation, producing one realisation.
 
-\begin{figure}[bh!]
+\begin{figure}[th!]
     \centering
     \includegraphics[width=1\linewidth]{figures/eigenvectors.pdf}
     \caption{A plot showing the eigenvector modes versus frequency of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
@@ -20,13 +20,13 @@ By generating mock data from theory using meer21cm, a HI IM was generated for a 
     \label{fig:eigenvalues}
 \end{figure}
 
-The frequency-frequency covariance of this signal was obtained, along with the eigenvectors and eigenvalues seen in \Cref{fig:eigenvectors} and \Cref{fig:eigenvalues}. The first few eigenvectors are spectrally smooth, exhibiting the smooth characteristic expected from the foreground. Additionally, the first three eigenvalue modes are the largest and correspond to the foreground. Therefore, $N_{FG} = 3$ principal components were removed from the total signal to perform the foreground cleaning. This threshold was chosen to maximise foreground suppression while minimising the loss of the HI signal. 
+The frequency-frequency covariance of this signal was obtained, along with the eigenvectors and eigenvalues seen in \Cref{fig:eigenvectors} and \Cref{fig:eigenvalues}. The first few eigenvectors are spectrally smooth, exhibiting the smooth characteristic expected from the foreground. Additionally, the first three eigenvalue modes are the largest and correspond to the foreground. Therefore, $N_{FG} = 3$ principal components were removed from the total signal to perform the foreground cleaning. This value was chosen to maximise foreground suppression while minimising the loss of the HI signal. 
 
-From the HI map, the 1D and cylindrical power spectrum were extracted. The cylindrical power spectrum separating the wave-vector \textbf{k} into its components $k_\perp$ and $k_\parallel$. $k_\perp$ corresponds to the spatial fluctuations across the sky which are perpendicular to the line-of-sight. $k_\parallel$ corresponds to the frequency-dependant fluctuations along the line-of-sight. 
+From the HI map, the 1D and cylindrical power spectrum were extracted. The cylindrical power spectrum separating the wave-vector \textbf{k} into its components $k_\perp$, corresponding to the spatial fluctuations across the sky which are perpendicular to the line-of-sight, and $k_\parallel$, corresponding the the frequency-dependent fluctuations along the line-of-sight.
 
 To evaluate the foreground removal, the ratio of the HI cylindrical power spectrum and the residual signal power spectrum was plotted. By inspecting this ratio, the components of the wave-vector which experienced signal loss were identified. These regions were used to define minimum thresholds for modes during foreground cleaning, minimising the HI signal loss. 
 
-Finally, the 1D power spectrum was then extracted again and compared to the theory. This was repeated for 100 realisations by passing in various seed numbers, allowing the many different but equally likely outcomes of the mock data to be generated and used to quantify uncertainty. 
+Finally, foreground cleaning was performed again using these minimum thresholds of the wave-number components. The 1D power spectrum was then extracted again and compared to the theory. This was repeated for 100 realisations by passing in various seed numbers, allowing the many different but equally likely outcomes of the mock data to be generated and used to quantify uncertainty. 
 
 \subsection{Gaussian Process Regression}
 

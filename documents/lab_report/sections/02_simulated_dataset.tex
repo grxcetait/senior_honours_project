@@ -1,9 +1,6 @@
 \section{Simulated Dataset}
 
-% [1] https://meer21cm.readthedocs.io/en/latest/
-A cosmological neutral hydrogen (HI) distribution can be generated from theory using the meer21cm package [\textbf{!!!}1]. This Python package allows for different signals which are expected in observational data to be generated such as the 21\,cm signal, the smooth foreground signal, the polarised foreground signal and instrumental noise. 
-
-\begin{figure}[hb!]
+\begin{figure}[b!]
     \centering
     \subfloat{
         \includegraphics[width=0.48\linewidth]{figures/hydrogen_map_wo_foreground.pdf}}
@@ -15,7 +12,10 @@ A cosmological neutral hydrogen (HI) distribution can be generated from theory u
     \label{fig:map_w_wo_foreground}
 \end{figure}
 
-By inputting cosmological models and survey parameters, such as the survey area and frequency range, a mock 21\,cm intensity mapping (IM) signal can be simulated. The mock data uses a fixed seed number to generate the random fields and gives one realisation. This can be projected onto the sky and other signals, such as noise and foregrounds, can be added. Maps generated with just the 21\,cm signal and the 21\,cm signal with foreground can be seen in \Cref{fig:map_w_wo_foreground}. The colour scales for both distributions are different, with the foreground being four orders of magnitude larger than the 21\,cm signal. It can also be seen that they are different in frequency structure. It is important to note that this mock data are an idealised portrayal of the expected observed data from a HI IM survey.
+% [1] https://meer21cm.readthedocs.io/en/latest/
+A cosmological neutral hydrogen (HI) distribution can be generated from theory using the meer21cm package (\cite{Meer21cmMeer21cmDocumentation}). This Python package allows for different signals which are expected in observational data to be generated, such as the 21\,cm signal, the smooth foreground signal, the polarised foreground signal, and instrumental noise. 
+
+By inputting cosmological models and survey parameters, such as the survey area and frequency range, a mock 21\,cm intensity mapping (IM) signal can be simulated. The mock data uses a fixed seed number to generate the random fields, giving one realisation. This can be projected onto the sky where other signals, such as noise and foregrounds, can be added. Maps generated with just the 21\,cm signal and the 21\,cm signal with foreground can be seen in \Cref{fig:map_w_wo_foreground}. The colour scales for both distributions are different, with the foreground being four orders of magnitude larger than the 21\,cm signal. It can also be seen that they are different in frequency structure. It is important to note that this mock data are an idealised portrayal of the expected observed data from a HI IM survey.
 
 \begin{figure*}[t]
     \centering
@@ -26,7 +26,7 @@ By inputting cosmological models and survey parameters, such as the survey area 
 
 The normalised frequency covariance for different signal components of the simulation can be seen in \Cref{fig:tot_fg_hi_covariance}, with the total signal consisting of the HI signal and foreground, the foreground signal, and the HI signal, from left to right. A plot of the frequency versus temperature of the foreground and HI signal can be seen in \Cref{fig:frequency_vs_temperature}. 
 
-Both of these figures highlight the difference in the frequency structures of the HI signal and foregrounds, where the foregrounds are smooth across frequencies while the HI signal varies rapidly across frequencies. It is clear that the foreground dominates the total signal, being four orders of magnitude larger than the HI signal. It can also be seen that there are frequencies where the foreground and HI signal overlap. This presents the challenge when performing foreground cleaning without removing some of the underlying HI signal. 
+Both of these figures highlight the difference in the frequency structures of the HI signal and foregrounds, where the foregrounds are smooth while the HI signal varies rapidly across frequencies. It is clear that the foreground dominates the total signal, being four orders of magnitude larger than the HI signal. It can also be seen that there are frequencies where the foreground and HI signal overlap. This presents the challenge when performing foreground cleaning without removing some of the underlying HI signal. 
 
 \begin{figure}[h!]
     \centering
