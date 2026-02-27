@@ -1,1 +1,9 @@
 \section{Discussion}
+
+The performance of the PCA foreground removal method was evaluated by comparing the recovered residual signal to the HI signal. By removing $N_{FG} = 3$, the majority of the foreground, which is four ordered of magnitude larger than the 21\,cm signal, was removed. 
+
+The ratio plot in \Cref{fig:cylindrical_power_spectrum_hi_signal} seen on the right reveals the outcome of the foreground cleaning. Due to the foregrounds being spectrally smooth, they occupy the low-$k_\parallel$ region of the power spectrum which corresponds to the large-scale frequency of the signal. However, it can be seen that low values of $k_\parallel$ have significant signal loss observed below $k_\parallel = 0.1$, indicating that the 21\,cm signal is indistinguishable from the foreground at these values. Similarly, there is overlap at low $k_\perp$ due to the smoothness of the foregrounds. 
+
+To address this, minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.0$ were defined and foreground cleaning of the signal were redone excluding these values to ensure minimal 21\,cm signal loss. Apply applying these thresholds, the resulting 1D power spectrum can be seen in \Cref{fig:log_power_spectrum_hi_signal}. The resulting residual signal shows strong agreement with the 21\,cm signal with no foreground removal at the high k. This suggests that PCA is highly effective at recovering the high-frequency fluctuations of the 21\,cm signal. However, the residual signal is slightly below the expected HI signal, suggesting over-cleaning where some of the 21\,cm signal is being removed during the foreground cleaning.
+
+Therefore, while PCA is an effective blind foreground removal method, its main limitation is the removal of entire modes which results in the observed signal loss at low $k_\parallel$. 

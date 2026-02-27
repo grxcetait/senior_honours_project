@@ -171,7 +171,7 @@
 \DeclareNameAlias{sortname}{family-given} % Ensures all names are Lastname First
 \DeclareNameAlias{default}{family-given-initials} % Ensures initials are used
 
-\addbibresource{references.bib} % Add the bibliography resource file
+\addbibresource{documents/references.bib} % Add the bibliography resource file
 
 %----------------------------------------------------------------------------------------
 %	LINKS
