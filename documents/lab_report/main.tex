@@ -8,6 +8,16 @@
 \usepackage{amsmath}
 \usepackage{cleveref}
 \usepackage{stfloats}
+\usepackage[final]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{documents/references.bib}
 
 %\runninghead{Sting Operation: WASP-135b in Transit} % A shortened article title to appear in the running head, leave this command empty for no running head
 
@@ -96,7 +106,7 @@ The LHCb experiment at CERN investigates charge-parity (CP) violation to better 
 %----------------------------------------------------------------------------------------
 % Apparently we should use %\autocite{} instead of \cite{} it makes citations format better.
 
-\newpage
+%\newpage
 \renewcommand{\refname}{Bibliography}
 \addcontentsline{toc}{section}{Bibliography}
 % \bibliographystyle{plain}
