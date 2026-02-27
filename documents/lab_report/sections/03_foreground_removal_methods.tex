@@ -4,7 +4,7 @@
 
 % [1] https://arxiv.org/pdf/2206.01579
 % [2] https://link.springer.com/book/10.1007/b98835
-Principal Component Analysis (PCA) is a blind foreground removal method which requires no prior knowledge of the foreground. This method takes advantage of the foreground being many order of magnitude larger than the 21cm signal [1]. Through estimating the frequency-frequency covariance matrix of the data and separating this into its eigenvectors and eigenvalues, the data can be transformed into a dimensional basis ordered by maximal variance [2]. In this basis, the first few modes, known as the principal components, contain the signal with the largest amplitude and are strongest in frequency. Due to its large amplitude and highly correlated frequency structure, the foregrounds can be reconstructed using the first few principal components $N_{FG}$. By identifying and removing $N_{FG}$ from the data, foreground cleaning can be performed. However, this foreground cleaning can also remove some HI signal which is seen at the high frequencies of the foregrounds. Additionally, the cleaned data can contain some residual foreground.
+Principal Component Analysis (PCA) is a blind foreground removal method which requires no prior knowledge of the foreground. This technique takes advantage of the foreground being several order of magnitude larger than the 21\,cm signal and has a highly correlated frequency structure [1]. Due to its large amplitude and highly correlated frequency structure, the foregrounds can be reconstructed using the first few principal components $N_{FG}$. By identifying and removing $N_{FG}$ from the data, foreground cleaning can be performed. Through estimating the frequency-frequency covariance matrix of the data and separating this into its eigenvectors and eigenvalues, the data can be transformed into a dimensional basis ordered by maximal variance [2]. 
 
 The data can be described as a matrix \textbf{b} which is a linear system with dimensions $N_\theta \times N_\nu$
 
@@ -12,11 +12,16 @@ The data can be described as a matrix \textbf{b} which is a linear system with d
     \textbf{d} = \textbf{As} + \epsilon
 \end{equation}
 
-where \textbf{A} is the mixing matrix, containing the amplitude of the $N_{FG}$ separable components \textbf{s} , and $\epsilon$ is the residual signal. This residual signal, which comprises of the noise and HI signal, is desired and so the equation can be rearranged to
+where \textbf{A} is the mixing matrix, containing the amplitude of the $N_{FG}$ separable components \textbf{s} , and $\epsilon$ is the residual signal. 
+
+In this basis, the first few modes, known as the principal components, contain the signal with the largest amplitude and are strongest in frequency. This residual signal comprises of the noise and HI signal. To recover the desired cosmological information, the equation is rearrange to isolate the residuals: 
 
 \begin{equation}
     \epsilon = \textbf{d} - \textbf{As}
 \end{equation}.
 
+While effective, this foreground cleaning can also remove some HI signal modes which overlap with the foreground, or leave behind some residual foreground contamination in the cleaned data.
+
 \subsection{Gaussian Process Regression}
 
+This section will give some background information on GPR and define the kernel functions used.
