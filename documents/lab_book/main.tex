@@ -6,6 +6,18 @@
 \usepackage{subfig}
 \usepackage{xcolor}
 
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\usepackage{stfloats}
+\usepackage[final]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
 \newcommand{\quickwordcount}[1]{%
     \immediate\write18{texcount -1 -sum -merge -q #1.tex output.bbl > #1-words.sum}%
     \input{#1-words.sum}words}
@@ -70,5 +82,7 @@
 
 %\bibliographystyle{unsrt}
 %\bibliography{references}
+\renewcommand{\refname}{Bibliography}
+\addcontentsline{toc}{section}{Bibliography}
 
 \end{document}
