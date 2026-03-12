@@ -46,22 +46,70 @@ I also had another look at the cylindrical power spectrum graphs from week 4
     \item These techniques either were not successful or they were successful but gave results that were similar to what I tried yesterday, with similar log-marginal likelihoods.
 \end{itemize}
 
+\newpage
+
 \subsubsection{Plots from initial guesses}
 
-- initial guesses
-- plots
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_inital_guesses.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_inital_guesses.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_inital_guesses.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_inital_guesses.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\newpage
 
 \subsubsection{Scipy optimize minimize, Nelder-Mead, RBF kernel with spectral index}
 
-- bounds
-- best fit parameters
-- plots
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_nelder_mead.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_nelder_mead.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
 
-\subsubsection{\subsubsection{Scipy optimize minimize, Nelder-Mead, RBF kernel without spectral index}
-}
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
 
-\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = free parameter}
-
-\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 5/2}
-
-\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 3/2}
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
