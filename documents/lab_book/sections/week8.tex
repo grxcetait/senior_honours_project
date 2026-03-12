@@ -8,8 +8,135 @@
     \item I had another look at the main GPR papers and looked at different kernels I could model.
     \item I wrote new functions for the matern kernel with different eta values and then the rbf kernel without the spectral parameter (where before I was fitting the rbf kernel with the spectral parameter).
     \item An issue I also had with GPR is that the length scale for foreground almost always hit the upper bounds. I had the thought to run the parameter optimisation but fix the foreground length scale so that it does not hit the upper bounds.
-    \item \textbf{Show the plots for the different outcomes from the kernels}
 \end{itemize}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, RBF kernel without spectral index}
+
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_fixed_l_fg_no_sp_indx.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_fixed_l_fg_no_sp_indx.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_fixed_l_fg_no_sp_indx.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_fixed_l_fg_no_sp_indx.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = free parameter}
+
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_eta_free_param_nelder_mead.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_eta_free_param_nelder_mead.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_eta_free_param_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_eta_free_param_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 5/2}
+
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_eta_5_2_nelder_mead.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_eta_5_2_nelder_mead.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_eta_5_2_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_eta_5_2_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 3/2}
+
+\begin{figure}[htb!]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/hi_signal_kernal_comparison_eta_3_2_nelder_mead.pdf}
+        \label{fig:pspec_lin_0_01}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/week8/fg_signal_kernal_comparison_eta_3_2_nelder_mead.pdf}
+        \label{fig:pspec_log_0_01}
+    \end{minipage}
+    \caption{Enter Caption}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{outputs/week8/log_1d_power_spectrum_eta_3_2_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/week8/cylindrical_power_spectrum_eta_3_2_nelder_mead.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
 
 \subsection{Wednesday 11th March}
 
