@@ -41,6 +41,27 @@ I also had another look at the cylindrical power spectrum graphs from week 4
 
 \begin{itemize}
     \item I had another look at the GPR notebook (3) and the PCA notebook (2). I decided to plot the residuals for both methods so I can better compare the before after after of the foreground cleaning. 
+    \item I think the issue with "optimize.fmin" was that there was no way to set bounds to the optimisation so the parameter values were going out of range of what could work.
+    \item I tried some more optimisation techniques within the "optimize.minimize" function such as: L-BFGS-B, SLSQP, TNC, Powell. 
+    \item These techniques either were not successful or they were successful but gave results that were similar to what I tried yesterday, with similar log-marginal likelihoods.
 \end{itemize}
 
-\textbf{Need to complete this part of the logbook. Just talk about the struggles I had with optimize.fmin and how I used optimize.minimize. Talk about bounds and also what I found and show my plots.}
+\subsubsection{Plots from initial guesses}
+
+- initial guesses
+- plots
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, RBF kernel with spectral index}
+
+- bounds
+- best fit parameters
+- plots
+
+\subsubsection{\subsubsection{Scipy optimize minimize, Nelder-Mead, RBF kernel without spectral index}
+}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = free parameter}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 5/2}
+
+\subsubsection{Scipy optimize minimize, Nelder-Mead, Matern kernel with eta = 3/2}

@@ -1,1 +1,36 @@
 \section{Week 8: 9th - 15th March 2026}
+
+\subsection{Tuesday 10th March}
+
+\begin{itemize}
+    \item My main issue with the GPR fitting was that something wasn't working with modelling the foreground signal properly and the signal wasn't getting cleaned.
+    \item A suggestion was that instead of finding the best optimisation method, try different kernels to see if those work better.
+    \item I had another look at the main GPR papers and looked at different kernels I could model.
+    \item I wrote new functions for the matern kernel with different eta values and then the rbf kernel without the spectral parameter (where before I was fitting the rbf kernel with the spectral parameter).
+    \item An issue I also had with GPR is that the length scale for foreground almost always hit the upper bounds. I had the thought to run the parameter optimisation but fix the foreground length scale so that it does not hit the upper bounds.
+    \item \textbf{Show the plots for the different outcomes from the kernels}
+\end{itemize}
+
+\subsection{Wednesday 11th March}
+
+\begin{itemize}
+    \item I reran some of my GPR code and tidied up some of the plots
+    \begin{itemize}
+        \item Eg. I reformatted plots with colour bars so it looked a bit nicer, redid some of y-axis subtitles so they didn't repeat if they were in a row of three, for example.
+    \end{itemize}
+\item It is also important that I spend enough time working on my report. 
+\item Today, I will focus on making the necessary changes and implementing any feedback I got from my draft 5 page report. This will include:
+\begin{itemize}
+    \item Combining the "foreground removal techniques" and "methodology" sections
+    \item Revising the introduction to read a bit better
+    \item Fixing some citations that had issues
+    \item Add in a graph before cutting out low k. Eg. do not just show the final result for PCA but also include the stages and plots before the final results.
+    \item Add in more explanation for the PCA results
+\end{itemize}
+\item Also, need to collect all of my results for GPR so far and put it into the lab book so it is easy to read and show for my meeting tomorrow.
+\item Also, need to come up with a list of questions to ask in my meeting tomorrow. About my results and about anything I need to change from my draft 5 page report. Just so I have enough time to implement them and make changes before the deadline in a few weeks.
+\end{itemize}
+
+\subsection{Thursday 12th March}
+
+\subsubsection{Meeting 8: Zhaoting and Alkistis}
