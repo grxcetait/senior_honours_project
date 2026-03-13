@@ -131,14 +131,14 @@ The versatility of the Matern kernel makes it a strong tool for various signals.
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week6/exp_kernel_lengthscales.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week6/exp_kernel_lengthscales_2.pdf}
     \caption{Enter Caption}
     \label{fig:exp_kernel_lengthscales}
 \end{figure}
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week6/rbf_kernels_lengthscales.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week6/rbf_kernels_lengthscales_2.pdf}
     \caption{Enter Caption}
     \label{fig:rbf_kernels_lengthscales}
 \end{figure}
@@ -150,6 +150,10 @@ The versatility of the Matern kernel makes it a strong tool for various signals.
     \label{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance}
 \end{figure}
 
-To demonstrate what the exponential and RBF kernel functions look like, both are presented in two cases: one with a low variance and low lengthscale ($\sigma = 1$, $l = 10$), and another with a low variance and high lengthscale ($\sigma = 1$, $l = 100$). These can be seen in \Cref{fig:exp_kernel_lengthscales} and \Cref{fig:rbf_kernels_lengthscales}. 
+To demonstrate what the exponential and RBF kernel functions look like, both are presented in two cases: one with a low variance and low lengthscale ($\sigma = 1$, $l = 10$), and another with a high variance and high lengthscale ($\sigma = 100$, $l = 100$). In \Cref{fig:exp_kernel_lengthscales} and \Cref{fig:rbf_kernels_lengthscales}, increasing the lengthscale $l$ changes the correlation of the signal. Increasing the value of $l$ results in a smoother functions, while a smaller value of $l$ results in a function with more fluctuations.
+
+We can see that the RBF function has a much wider diagonal in the case of high variance and high lengthscale ($\sigma = 100$, $l = 100$). A wider diagonal means that the data is much more correlated in frequency. A smaller diagonal means that the data points are less correlated in frequency and are mainly correlated with themselves and the points directly around them. It can also be seen that increasing the variance changes the amplitude of the covariance, shown in the colour bars
+
+From these plots, 
 
 \subsubsection{Hyperparameter optimisation and model selection}
