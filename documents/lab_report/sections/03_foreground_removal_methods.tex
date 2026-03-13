@@ -127,6 +127,29 @@ By choosing different values for the spectral parameter $\eta$, the Matern kerne
     
 \end{itemize}
 
+The versatility of the Matern kernel makes it a strong tool for various signals. By adjusting its hyperparameters, each component of the data can be effectively modelled.
 
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week6/exp_kernel_lengthscales.pdf}
+    \caption{Enter Caption}
+    \label{fig:exp_kernel_lengthscales}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week6/rbf_kernels_lengthscales.pdf}
+    \caption{Enter Caption}
+    \label{fig:rbf_kernels_lengthscales}
+\end{figure}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week6/rbf_kernel_w_sp_indx_vs_foreground_covariance.pdf}
+    \caption{Enter Caption}
+    \label{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance}
+\end{figure}
+
+To demonstrate what the exponential and RBF kernel functions look like, both are presented in two cases: one with a low variance and low lengthscale ($\sigma = 1$, $l = 10$), and another with a low variance and high lengthscale ($\sigma = 1$, $l = 100$). These can be seen in \Cref{fig:exp_kernel_lengthscales} and \Cref{fig:rbf_kernels_lengthscales}. 
 
 \subsubsection{Hyperparameter optimisation and model selection}
