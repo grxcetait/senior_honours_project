@@ -6,22 +6,127 @@
 % [2] https://link.springer.com/book/10.1007/b98835 (last sentence but not cited yet)
 Principal Component Analysis (PCA) is a blind foreground removal method which requires no prior knowledge of the foreground. This technique takes advantage of the foreground being several order of magnitude larger than the 21\,cm signal and having a highly correlated frequency structure (\cite{cunningtonHIIntensityMapping2022}). Through estimating the frequency-frequency covariance matrix of the data and separating this into its eigenvectors and eigenvalues, the data can be transformed into a dimensional basis ordered by maximal variance. 
 
-The data can be described as a matrix \textbf{d} which is a linear system with dimensions $N_\theta \times N_\nu$
+%The data can be described as a matrix \textbf{d} which is a linear system with dimensions $N_\theta \times N_\nu$
 
-\begin{equation}
-    \textbf{d} = \textbf{As} + \epsilon
-\end{equation}
+%\begin{equation}
+%    \textbf{d} = \textbf{As} + \epsilon
+%\end{equation}
 
-where \textbf{A} is the mixing matrix, containing the amplitude of the $N_{FG}$ separable components \textbf{s} , and $\epsilon$ is the residual signal. 
+%where \textbf{A} is the mixing matrix, containing the amplitude of the $N_{FG}$ separable components \textbf{s} , and $\epsilon$ is the residual signal. 
 
-In this basis, the first few modes, known as the principal components, contain the signal with the largest amplitude and are strongest in frequency. By identifying and removing the principal components which correspond to the foreground $N_{FG}$, foreground cleaning can be performed. To recover the desired cosmological information, the equation is rearrange to isolate the residuals: 
+\begin{figure}[th!]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/eigenvectors.pdf}
+    \caption{A plot showing the eigenvector modes versus frequency of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
+    \label{fig:eigenvectors}
+\end{figure}
 
-\begin{equation}
-    \epsilon = \textbf{d} - \textbf{As}.
-\end{equation}
+\begin{figure}[th!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week4/eigenvalues.pdf}
+    \caption{A plot showing the eigenvalues versus eigenvalue index of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
+    \label{fig:eigenvalues}
+\end{figure}
 
-While effective, this foreground cleaning can also remove some HI signal modes which overlap with the foreground, or leave behind some residual foreground contamination in the cleaned data.
+In this basis, the first few modes, known as the principal components, contain the signal with the largest amplitude and are strongest in frequency. By generating mock data from theory using meer21cm, a HI IM was generated for a total signal consisting of the 21\,cm signal and the foregrounds. This data was generated using a fixed seed for random number generation, producing one realisation. 
+
+The frequency-frequency covariance of this signal was obtained, along with the eigenvectors and eigenvalues seen in \Cref{fig:eigenvectors} and \Cref{fig:eigenvalues}. By identifying and removing the principal components which correspond to the foreground $N_{FG}$, foreground cleaning can be performed. While effective, this foreground cleaning can also remove some HI signal modes which overlap with the foreground, or leave behind some residual foreground contamination in the cleaned data. 
+
+The first few eigenvectors are spectrally smooth, exhibiting the smooth characteristic expected from the foreground. Additionally, the first three eigenvalue modes are the largest and correspond to the foreground. Therefore, $N_{FG} = 3$ principal components were removed from the total signal to perform the foreground cleaning. This value was chosen to maximise foreground suppression while minimising the loss of the HI signal. 
+
+%To recover the desired cosmological information, the equation is rearrange to isolate the residuals: 
+
+%\begin{equation}
+%    \epsilon = \textbf{d} - \textbf{As}.
+%\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_None_None.pdf}
+    \caption{Enter Caption}
+    \label{fig:1d_log_power_spectrum_None_None}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week3/cylindrical_power_spectrum_None_None.pdf}
+    \caption{Enter Caption}
+    \label{fig:cylindrical_power_spectrum_None_None}
+\end{figure}
+
+From the HI map, the 1D and cylindrical power spectrum were extracted and can be seen in \Cref{fig:1d_log_power_spectrum_None_None}. The cylindrical power spectrum separates the wave-vector \textbf{k} into its components $k_\perp$, corresponding to the spatial fluctuations across the sky which are perpendicular to the line-of-sight, and $k_\parallel$, corresponding the the frequency-dependent fluctuations along the line-of-sight.
+
+To evaluate the foreground removal, the ratio of the HI cylindrical power spectrum and the residual signal power spectrum was plotted, seen in \Cref{fig:cylindrical_power_spectrum_None_None}. By inspecting this ratio, the components of the wave-vector which experienced signal loss were identified. These regions were used to define minimum thresholds for modes during foreground cleaning, minimising the HI signal loss. 
+
+Finally, foreground cleaning was performed again using these minimum thresholds of the wave-number components. The 1D power spectrum was then extracted again and compared to the theory. This was repeated for 100 realisations by passing in various seed numbers, allowing the many different but equally likely outcomes of the mock data to be generated and used to quantify uncertainty. 
+
 
 \subsection{Gaussian Process Regression}
 
-This section will give some background information on GPR and define the kernel functions used.
+% [1] https://link.springer.com/chapter/10.1007/978-3-540-28650-9_4
+% [2] https://mc-stan.org/docs/2_38/stan-users-guide/gaussian-processes.html#:~:text=Unlike%20a%20simple%20multivariate%20normal,mean%20function%20and%20covariance%20function.
+In Gaussian Process Regression (GPR), the various components of the signal, the foreground, 21\,cm signal, and noise, are modelled as realisations of a Gaussian Process (GP) [1]. A GP is a Gaussian distribution extended to infinite dimensions. While a standard multivariate Gaussian distribution describes a finite set of variables, a GP expands this to an infinite number of variables. In this context, instead of describing discrete points, the distribution describes continuous functions over a range of frequencies $\nu$. Consequently, Gaussian Processes provides a probability distribution over a space of possible functions. 
+
+Contrasting to multivariate Gaussian distributions, which is defined by a mean vector and covariance matrix, a GP is defined by a mean function and a covariance function [2]. In this case, each element of the mean is a function of frequency and the covariance function is defined by a kernel which means they are easy to sample from. A kernel, also known as a covariance function or kernel function, defines the shape of the functions by determining the relationship between different points in the data and is the set of functions considered for the data. It specifies which functions are likely under the GP prior. This, then, determines the generalisation properties of the model.
+
+GPR operates in a similar way as regression with parametric models, with the main distinction being that a prior is put on the the kernel, where conventionally the prior has a mean of zero, instead on the specific model coefficients. GPR is a non-parametric regression technique. This means it is able to estimate relationships between variables without assuming a predefined function form, such as the data being linear or quadratic. Instead, the model is constructed directly from information derived from the data, making it useful for complex, unknown, or non-linear datasets. 
+
+% [3] https://arxiv.org/pdf/2102.01697
+Another advantage of GPs is that a GP is stochastic which mean that each extraction is random and can take any functional form consistent with the mean and kernel function. Assuming only Gaussian noise is present, they also have a well defined marginal likelihood function, so it is easy to compute the probability of data conditioned on a given value of the mean and kernel functions [3]. This can be maximised to find the optimal values of the model parameters or be used to evaluate the posterior which is very useful for inference problems.
+
+Although, a larger amount of data is required to work well and in order to achieve the same level of uncertainty as a parametric model. Additionally, it poses a higher risk of over fitting, slower to compute and can be difficult to interpret. 
+
+The assumption will be made that the data, and each of its components, are drawn from a GP with a mean and kernel function. A zero mean function will also be assumed which is commonly done with GPR. This is consistent with the data since each frequency slice is mean-centred. 
+
+Since the data is made up of separate components which are all GPs, the kernel function can also be split into separate components: the foreground kernel and the 21\,cm signal kernel. Since the foreground model is a GP, it has an expectation value and covariance. The expectation value is a prediction of the foreground signal and is dependent on both the foreground kernel, the total kernel of the data, and the data. While, the covariance provides information on the uncertainty on this prediction. Therefore, it is important there are suitable kernels for all components of the data. 
+
+By making an educated estimate of the true foreground signal with an appropriate kernel, the foreground signal can be modelled. This can be removed from the data, by subtracting the expectation value of the foreground from the data, and the residual signal, ideally left with the instrumental noise the the desired 21\,cm signal, is achieved. 
+
+\subsubsection{Kernel functions}
+
+% [1] https://www.cs.toronto.edu/~duvenaud/cookbook/
+% [2] https://www.repository.cam.ac.uk/items/a54f0711-f777-4ee1-a685-3b76dae5ad91
+% [3] https://gaussianprocess.org/gpml/chapters/RW.pdf
+The selection of kernel functions is critical and it significantly affects the generalisation properties of a GP model [1]. The choice of kernel functions is data driven as they must to chosen to best describe the covariance of the data, along with the best-fitting hyperparameters, which are the parameters of the kernel functions. These functions range from standard functions which are commonly used in GPR to custom functions which can be tailored to specific needs of the data. One commonly used function is the Matern kernel [3]:
+
+\begin{equation}
+    K_{Matern}(\nu, \nu') = \sigma^2 \frac{2^{1-\eta}}{\Gamma(\eta)}(\sqrt{2\eta}\frac{|\nu - \nu'|}{l})^\eta K_\eta (\sqrt{2\eta}\frac{|\nu - \nu'|}{l})
+\end{equation}
+
+where $\Gamma$ is the gamma function, $K_\eta$ is the modified Bessel function. This kernel has three hyperparameters which we need to optimise:
+
+\begin{itemize}
+    \item \textbf{Variance $\sigma^2$:} this describes the amplitude or "power" of the signal. Since the foregrounds are significantly brighter than the HI signal, $\sigma^2$ is expected to be much larger for the foreground component (see \Cref{fig:frequency_vs_temperature}).
+    \item \textbf{Lengthscale $l$:} this describes the scale of frequency correlations. A larger $l$ indicates the data points are more correlated over wide frequency ranges. A larger lengthscale is expected for foregrounds since they are much more correlated in frequency (see \Cref{fig:tot_fg_hi_covariance}).
+    \item \textbf{Spectral parameter $\eta$:} this determines the smoothness of the function. Since the foregrounds are smooth in frequency and the HI signal is more Gaussian, $\eta$ is expected to be larger for the foregrounds than for the HI signal (see \Cref{fig:frequency_vs_temperature}).
+\end{itemize}
+
+By choosing different values for the spectral parameter $\eta$, the Matern kernel can simplify. Some different choices for this hyperparameter are:
+
+% [4] https://arxiv.org/abs/2010.15892
+% [5] https://academic.oup.com/mnras/article/493/2/1662/5727337#sec3
+% [6] https://arxiv.org/pdf/2105.12665
+% [7] https://academic.oup.com/mnras/article/478/3/3640/4995230
+\begin{itemize}
+
+    \item \textbf{$\eta \rightarrow \infty$:} the Matern kernel simplifies to the Radial Basis Function (RBF), also known as the squared exponential or Gaussian kernel. This represents an extremely smooth signal which makes it the ideal choice for modelling the foreground component. [4], [5], and [6] use this kernel to model their smooth foreground component. This has the form:
+
+    \begin{equation}
+        K(\nu, \nu') = \sigma^2 exp(\frac{(\nu - \nu')^2}{2l^2})
+    \end{equation}
+    
+    \item \textbf{$\eta = 5/2$:} the Matern kernel is not quite as smooth in frequnecy as the RBF kernel but is still relatively smooth. This kernel was used to model the smooth foreground component by [7].
+    
+    \item \textbf{$\eta = 3/2$:} the Matern kernel is even less smooth in frequency and can be used to describe foreground components with moderate frequency smoothness. This was done by [5] and [7].
+    
+    \item \textbf{$\eta = 1/2$:} the Matern kernel is the least smooth in frequency and simplifies tot eh exponential function. It is not smooth at all which makes it a strong match for signals that vary significantly with frequency, such as the HI signal. This is used to describe the HI signal by [4], [5], [6], and [7] and has the form: 
+
+    \begin{equation}
+        K_{exp}(\nu, \nu') = \sigma^2exp(\frac{|\nu - \nu'|}{l})
+    \end{equation}
+    
+\end{itemize}
+
+
+
+\subsubsection{Hyperparameter optimisation and model selection}
