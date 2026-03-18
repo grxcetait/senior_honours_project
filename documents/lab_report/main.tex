@@ -22,53 +22,53 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
+%
+%                       This section generates a title page
+%                       Edit only the sections indicated to put
+%                       in the project title, your name, supervisor,
+%                       project length in weeks and submission date
+%
 \begin{document}
-\epsfxsize=40mm                         % Size of crest
-\thispagestyle{empty} % This removes the running head from the top corner
-\begin{minipage}[b]{110mm}
-        {\Huge\bf School of Physics \\and Astronomy
-        \vspace*{17mm}}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{40mm}               
-        \makebox[40mm]{
-        \includegraphics[width=40mm]{figures/UoEcrest.pdf}}
-\end{minipage}
+\pagestyle{empty}                       % No numbers on title page      
+
+\par\noindent\includegraphics[width=12cm]{PandA_crest.pdf}
+
 \par\noindent                                           % Centre Title, and name
 \vspace*{2cm}
 \begin{center}
-        \huge\bf Data Science Techniques Applied To Cosmology
+        \Large\bf \Large\bf Senior Honours Project\\
+        \LARGE\bf Foreground Removal in 21\,cm HI Intensity Mapping: Comparing Principal Component Analysis and Gaussian Process Regression         % Replace with your title
 \end{center}
-\vspace*{1cm}
+\vspace*{0.5cm}
 \begin{center}
-        \bf 
-        \large
-        Grace Tait\\
-        \vspace{0.5cm}
-        February 2026                         % Submission Date
+        \bf Grace Tait\\                               % Repace with your name and
+        March 2026                                   % Submission Date
 \end{center}
 \vspace*{5mm}
-
-%----------------------------------------------------------------------------------------
-%	ABSTRACT
-%----------------------------------------------------------------------------------------
-
-
-                                         
+%
+%                       Insert your abstract HERE                
 \begin{abstract}
-Neutral hydrogen (HI) 21\,cm intensity mapping is a promising probe of the large-scale structure of the Universe, but is contaminated by foreground emission several orders of magnitude brighter than the cosmological signal. This work compares Principal Component Analysis (PCA) and Gaussian Process Regression (GPR) for foreground removal methods in simulated 21\,cm intensity mapping. PCA successfully recovered the HI power spectrum after removing three principal components, with residuals consistent with the true signal after applying minimum mode thresholds of $k_{\perp}$ = 0.1\,Mpc$^{-1}$ and $k_{\parallel}$ = 0.1\,Mpc$^{-1}$. GPR, using an exponential kernel for the HI signal and a spectral-index-modified RBF kernel for the foreground, yielded incomplete foreground removal due to poorly constrained foreground hyperparameters. While PCA outperforms GPR for this idealised simulation by leveraging the statistical structure in the data, GPR's ability to propagate uncertainties and incorporate physical priors may be a valuable asset for next-generation surveys with MeerKAT.
+        Neutral hydrogen (HI) 21\,cm intensity mapping is a promising probe of the large-scale structure of the Universe, but is contaminated by foreground emission several orders of magnitude brighter than the cosmological signal. This work compares Principal Component Analysis (PCA) and Gaussian Process Regression (GPR) for foreground removal methods in simulated 21\,cm intensity mapping. PCA successfully recovered the HI power spectrum after removing three principal components, with residuals consistent with the true signal after applying minimum mode thresholds of $k_{\perp}$ = 0.1\,Mpc$^{-1}$ and $k_{\parallel}$ = 0.1\,Mpc$^{-1}$. GPR, using an exponential kernel for the HI signal and a spectral-index-modified RBF kernel for the foreground, yielded incomplete foreground removal due to poorly constrained foreground hyperparameters. While PCA outperforms GPR for this idealised simulation by leveraging the statistical structure in the data, GPR's ability to propagate uncertainties and incorporate physical priors may be a valuable asset for next-generation surveys with MeerKAT.
 \end{abstract}
-
 
 \vspace*{1cm}
 
-\vspace*{3cm}
+\subsubsection*{Declaration}
+
+\begin{quotation}
+  I declare that this project and report is my own work.
+\end{quotation}
+
+\vspace*{2cm}
+%Signature:\hspace*{8cm}Date:  27/02/2026         % You can include a scanned version 
+                                                 % of you siganture here, or comment 
+                                                 % this line out
 
 \vfill
-\begin{center}
-    {\bf Supervisor:} Dr. Trent Dupuy                % Change to suit
-\end{center}
- \newpage
+{\bf Supervisor:} Dr. Zhaoting Chen, Prof. Alkistis Pourtsidou                 % Change to suit
+\hfill
+10 Weeks                                         % Change to suit
+\newpage
 
 
 %----------------------------------------------------------------------------------------
