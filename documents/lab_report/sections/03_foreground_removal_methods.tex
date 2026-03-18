@@ -19,7 +19,7 @@ Principal Component Analysis (PCA) is a blind foreground removal method which re
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width=1\linewidth]{figures/eigenvectors.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week4/eigenvectors.pdf}
     \caption{A plot showing the eigenvector modes versus frequency of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
     \label{fig:eigenvectors}
 \end{figure}
@@ -190,18 +190,6 @@ Model selection for GPR is a two step process which are interdependent. The firs
 
 where $n$ is the number of data points sampled, and K is the total kernel function of the data. The LML can be computed analytically since the assumption was made that each component of the data is a GP and the noise is Gaussian distributed. 
 
-To compare the performance of various models with each other, the Bayes factor $\mathcal{Z}$ can be computed. This is the ratio of two marginal likelihoods but since the log has been taking, the log of the Bayes factor is computed by taking the difference between the LML of two models: 
-
-\begin{equation}
-    \log \mathcal{Z} = LML_{method_1} - LML_{method_2}
-\end{equation}
-
-where a larger value of $\mathcal{Z}$ or $\log \mathcal{Z}$ means that the first model fits the data better than the second model.
-
-% [1] https://academic.oup.com/mnras/article/493/2/1662/5727337#199912059
-% [2] https://arxiv.org/pdf/2105.12665
-In practice, there are various methods to be used to determine the optimal hyperparameters of kernel functions such as: standard optimisation, Monte Carlo Markov Chain (MCMC) methods as used by [1], or Nested Sampling as used by [2]. While standard optimisation methods, such as gradient descent used by [2] or scipy.optimize.minimize which provides various minimisation algorithms, they are able to find the optimal hyperparameters incredibly quick and are not computationally expensive, they have a few limitations. They are prone to getting stuck in local minima and are sensitive to initial guesses so if the priors are far off, the algorithm might fail or converge to values which are incorrect. Additionally, these methods only gives the best values without any uncertainty or probability or likelihoods. 
-
 \begin{figure*}[ht!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week5/cylindrical_power_spectrum_[0, 0.06]_None.pdf}
@@ -215,6 +203,18 @@ In practice, there are various methods to be used to determine the optimal hyper
     \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
     \label{fig:1d_log_power_spectrum_[0, 0.04]_None_both}
 \end{figure}
+
+To compare the performance of various models with each other, the Bayes factor $\mathcal{Z}$ can be computed. This is the ratio of two marginal likelihoods but since the log has been taking, the log of the Bayes factor is computed by taking the difference between the LML of two models: 
+
+\begin{equation}
+    \log \mathcal{Z} = LML_{method_1} - LML_{method_2}
+\end{equation}
+
+where a larger value of $\mathcal{Z}$ or $\log \mathcal{Z}$ means that the first model fits the data better than the second model.
+
+% [1] https://academic.oup.com/mnras/article/493/2/1662/5727337#199912059
+% [2] https://arxiv.org/pdf/2105.12665
+In practice, there are various methods to be used to determine the optimal hyperparameters of kernel functions such as: standard optimisation, Monte Carlo Markov Chain (MCMC) methods as used by [1], or Nested Sampling as used by [2]. While standard optimisation methods, such as gradient descent used by [2] or scipy.optimize.minimize which provides various minimisation algorithms, they are able to find the optimal hyperparameters incredibly quick and are not computationally expensive, they have a few limitations. They are prone to getting stuck in local minima and are sensitive to initial guesses so if the priors are far off, the algorithm might fail or converge to values which are incorrect. Additionally, these methods only gives the best values without any uncertainty or probability or likelihoods. 
 
 On the other hand, Nested Sampling is designed specifically to calculate the marginal likelihood and is good at handling data with several separate peaks with high likelihoods. This, however, is highly complex and much more computationally expensive. MCMC Sampling provide a full posterior showing the probability distribution and correlation between parameters. They are also better at finding the global peak as it explores parameter space. This method takes much longer than standard optimisation techniques but runs quicker than Nested Sampling, thus, being a middle ground between the two methods. 
 
