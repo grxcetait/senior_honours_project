@@ -1,23 +1,120 @@
 \section{Results}
+\label{sec:results}
 
-The outputs of the PCA foreground removal method are presented below. The cylindrical power spectrum for the original HI signal, the residual signal remaining after the removal of $N_{FG} = 3$ principal components, and the ratio between these two datasets can be seen in \Cref{fig:cylindrical_power_spectrum_hi_signal}.
+Here, we will present the main results which is the performance of both PCA and GPR as foreground removal methods. First, the results for PCA will be presented, secondly GPR, then a comparison will be made.
 
-\begin{figure*}[t!]
+\subsection{Principal Component Analysis}
+
+The performance of the PCA foreground removal was evaluated by comparing the recovered residual signal to the true 21\,cm signal through the cylindrical and spherically averaged 1D power spectra.
+
+\subsubsection{Cylindrical Power Spectrum}
+
+The cylindrical power spectrum of the true HI power spectrum, the residual signal after PCA cleaning, and their ratio seen in \Cref{fig:cylindrical_power_spectrum_hi_signal}. The ratio panel provides the clearest diagnostic of the cleaning performance. At high $k_{\parallel}$, the ratio is close to unity and uniformly red, indicating that the recovered signal is in good agreement with the true HI power spectrum in these modes. This is physically expected as high $k_{\parallel}$ modes correspond to small-scale structure along the line of sight that varies rapidly with frequency and is therefore largely orthogonal to the spectrally smooth foreground components removed by PCA. 
+
+However, at low $k_{\parallel}$, the ratio drops below unity, indicating significant signal loss. Here, the 21\,cm signal shares spectral structure with the foregrounds and cannot be cleanly separated by PCA. This inevitably removes some genuine HI signal alongside the foreground components, a known limitation of blind component separation techniques. 
+
+Through inspection of the ratio panel, minimum thresholds of $k_\perp = ???$ and $k_\parallel = ???$ were defined and the foreground cleaning of the signal was redone excluding modes below these values. The middle panel of \Cref{fig:cylindrical_power_spectrum_hi_signal} confirms that the excluded low-$k$ modes in the residual signal are consistent in amplitude with the true HI signal, validating the threshold selection.
+
+It can be seen that the pixels corresponding to these low $k$ values in the middle residual signal panel which were excluded from the clean are the same magnitude as the true HI signal, contrasting to before the clean where there was a clear dimming in brightness seen in \Cref{fig:cylindrical_power_spectrum_None_None}. This means that these $k$ values were successfully excluded from the clean. 
+
+\subsubsection{1D Power Spectrum}
+
+The spherically averaged 1D power spectrum with the true HI signal and the clean before and after applying the minimum $k$ thresholds can be seen in \Cref{fig:1d_log_power_spectrum_None_None}. Prior to applying the minimum thresholds, the residual signal follows the true HI signal at large $k$ but shows a clear deviation at low $k$, consistent with the signal loss identified in the cylindrical power spectrum ratio panel.
+
+After applying the thresholds, the residual signal shows a  stronger agreement with the 21\,cm signal across the whole $k$ range, with the two curves lying within each other's error bars for $k \gtrsim 0.4$/,Mpc$^{-1}$. This suggests that PCA is effective at recovering the small-scale fluctuations of the 21\,cm signal where foreground contamination is minimal. At lower $k$ values $k \lesssim 0.4$/,Mpc$^{-1}$, a small but systematic excess above the true HI signal persists, indicating that residual foreground power remains even after threshold application. This suggests that this subtraction does not achieve complete foreground removal around the region of the threshold boundary, consistent with the gradual rather than sharp transition seen in the cylindrical power spectrum ratio panel.
+
+\subsubsection{Overall Performance}
+
+Overall, the PCA foreground removal performs well within the defined $k$ thresholds, recovering the HI power spectrum with good fidelity at intermediate and high $k$. The primary limitation is the signal loss at low $k_{\parallel}$, which is a consequence of the method's assumption that the foregrounds occupy lower values of $k$. This assumption breaks down when the HI signal has correlated structure on scales comparable to the foreground lengthscale. The choice of $N_{FG}$ components has a trade-off where two few components leave residual foreground, while too many mean the HI signal might be subtracted. The results suggests that three components is a reasonable choice for this simulation, though a more rigorous approach would involve cross-validating the choice of $N_{FG}$ against the recovered power spectrum as a function of component number. 
+
+\subsection{Gaussian Process Regression}
+
+Here, we will discuss the results of foreground removal using GPR. First, we will go over the hyperparameter estimations that came as a result of MCMC Sampling along with the MCMC convergence. Then, we will discuss the results from the foreground removal which is the 1D and cylindrical power spectrum. Finally, we will finish with a review on the overall performance of GPR.
+
+\begin{figure}[bt!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week5/cylindrical_power_spectrum_hi_map.pdf}
-    \caption{The cylindrical power spectra for the HI signal, the residual total signal (HI signal and foreground) after foreground removal, and the ratio between the residual signal and the HI signal, from left to right.}
-    \label{fig:cylindrical_power_spectrum_hi_signal}
-\end{figure*}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_[0.025, 0.1]_None.pdf}
-    \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
-    \label{fig:log_power_spectrum_hi_signal}
+    \includegraphics[width=1\linewidth]{outputs/week8/hi_signal_kernal_comparison_mcmc_with_sp_indx_fg_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:hi_signal_kernal_comparison_mcmc_with_sp_indx_fg_1}
 \end{figure}
 
-%The performance of the PCA foreground removal method was evaluated by comparing the recovered residual signal to the HI signal. $N_{FG} = 3$ principal components were removed and then the cylindrical power spectrum was plotted. This is seen in \Cref{fig:cylindrical_power_spectrum_hi_signal}. 
+\subsubsection{Hyperparameter Estimation}
 
-From observing the ratio plot on the right panel, minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$ were defined for the foreground cleaning to minimise HI signal loss. 
+\begin{table*}[bt!]
+    \centering
+    \renewcommand{\arraystretch}{2}
+    \caption{Median and $1\sigma$ estimates for the hyperparameters.}
+    \label{tab:hyperparameters}
+    \begin{tabular}{|l|ccccc|}
+        \hline
+        Hyperparameter & $\sigma_{HI}^2$ [mK$^2$] & $\sigma_{fg}^2$ [mK$^2$] & $\mathcal{l_{HI}^2}$ [MHz] & $\mathcal{l_{fg}^2}$ [MHz] & $\gamma$ \\
+        \hline
+         & 0.0013 $^{+0.0001}_{-0.0001}$ & 0.2215 $^{+0.1472}_{-0.0914}$ & 0.0738 $^{+0.0294}_{-0.0376}$ & 737.1470 $^{+184.6090}_{-245.0080}$ & -2.9153 $^{+1.0433}_{-1.1075}$ \\
+         \hline
+         \hline
+        Prior & $\mathcal{U}$ (0.000001, 0.5)& $\mathcal{U}$ (0.000001, 0.5) & $\mathcal{U}$ (0.01, 2.0) & $\mathcal{U}$ (10.0, 1000.0) & $\mathcal{U}$ (-5.0, -1.0) \\
+        \hline
+    \end{tabular}
+\end{table*}
 
-The resulting 1D power spectrum from the foreground cleaning having implemented the minimum threshold can be seen in \Cref{fig:log_power_spectrum_hi_signal}.
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{outputs/week8/mcmc_corner_plot_with_sp_indx_fg_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:mcmc_corner_plot_with_sp_indx_fg_1}
+\end{figure*}
+
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{outputs/week8/mcmc_chain_with_sp_indx_fg_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:mcmc_chain_with_sp_indx_fg_1}
+\end{figure*}
+
+The posterior distributions of the GPR hyperparameters were explored using MCMC sampling, with the resulting corner plot shown in \Cref{fig:mcmc_corner_plot_with_sp_indx_fg_1}. The model includes five hyperparameters: the amplitude and the length scale of the HI signal kernel and the foreground kernel ($\sigma_{HI}$, $\sigma_{fg}$, $\mathcal{l_{HI}}$, $\mathcal{l_{fg}}$), and the foreground spectral index ($\gamma$). All together, these parameters control how the GPR model separates the spectrally smooth foreground from the HI signal which varies rapidly with frequency. A summary of the recovered hyperparameter values can be seen in \Cref{tab:hyperparameters}. 
+
+The HI amplitude $\sigma_{HI}$ is recovered as 0.0013$^{+0.1472}_{-0.0914}$, which is tightly constrained and suggests that the GPR model is correctly identifying the amplitude of the HI fluctuations even in the presence of foreground contamination. 
+
+The HI lengthscale $l_{HI} = 0.0738^{+0.0294}_{-0.0376}$\,MHz  is moderately constrained. While this posterior peaks, it also has a tail towards smaller values. This is as expected since this parameter controls how smooth the signal is across frequency and a smaller value results in more rapid variations, consistent with the HI signal. 
+
+On the other hand, the foreground amplitude $\sigma_{fg} = 0.02215^{+0.1472}_{-0.0914}$ is considerably less well constrained. This broad and asymmetric posterior reflects a degeneracy in foreground modelling where the total foreground component can be reproduced by different combinations of amplitude and correlation length. This means that it is difficult to confine these parameters independently. 
+
+The foreground lengthscale $l_{fg}$ is recovered as 737.15$^{+184.61}_{-245.01}$\,MHz and has a particularly large and asymmetric uncertainty. The posterior rises steeply at low values and has a long tail towards higher values, suggesting the data is consistent with a wide range of $l_{fg}$. This is an issue which kept on arising upon trying different optimisation methods. No matter what initial guesses or range of bounds were used, $l_{fg}$ would consistently hit the upper bound of the range every time, even if the bound was made smaller or wider. Physically, this large $l_{fg}$ corresponds to foreground emissions that is highly correlated in frequency and therefore very smooth which is consistent with what we expect with synchrotron-dominated foregrounds. However, the poor constraint indicates that the frequency bandwidth used may be insufficient to fully characterise $l_{fg}$. A wider bandwidth may be beneficial for this hyperparameter.
+
+Finally, the foreground spectral index $\gamma$ is recovered as -2.9153$^{+1.0433}_{-1.1075}$ with a broad posterior and the injected true value of -2.7 being within the uncertainties. While this median value is consistent with the expected behaviour, the wide posterior reflects the difficulty of constraining the spectral shape which is possibly due to the relatively narrow frequency range. The diffuse joint posterior for $l_{fg}$ and $\gamma$ in the corner plot suggests that the data cannot distinguish between the different combinations of these hyperparameters. This physically makes sense as a steeper $\gamma$ and a longer $l_{fg}$ can produce similar foreground covariance structures, resulting in these hyperparameters being difficult to constrain independently.
+
+The MCMC trace plots for all five hyperparameters are shown in \Cref{fig:mcmc_chain_with_sp_indx_fg_1}. Trace plots are important in MCMC as they verify that the chains have converged and they explore the parameter space efficiently. Each coloured line represents an individual walker's trajectory through parameter space over 10,000 steps. For a well-converged sampler where the walkers efficiently explore the posterior distribution, the traces should be dense bands that are stationary, meaning the chain has converged around a mean with variance variance with no upward or downward trends. 
+
+For all hyperparameters, the plots demonstrate good mixing across all walkers. The HI signal hyperparameters ($\sigma_{HI}$, $l_{HI}$) are well converged and stable, consistent with the constrained posteriors seen in the corner plot. However, the foreground parameters ($\sigma_{fg}$, $l_{fg}$, $\gamma$), in particular the spectral index and lengthscale, show the walkers exploration a wide range of values throughout the run. While these chains do not show any systematic drift and appear stationary, this large spread is consistent with the broad, poorly constrained posteriors seen in the corner plot. This confirms the degeneracies the foreground model posses and that the difficulty in constraining these hyperparameters is a feature of the posterior landscape rather than the sampler failing to converge. 
+
+\subsubsection{Power Spectra}
+
+\begin{figure}[bt!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week8/log_1d_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:log_1d_power_spectrum_mcmc_with_sp_indx_fg_1}
+\end{figure}
+
+The spherically averaged log 1D power spectrum before and after GPR foreground removal is shown in \Cref{fig:log_1d_power_spectrum_mcmc_with_sp_indx_fg_1}. The blue curve represents the true HI power spectrum whereas the red dashed curve shows the recovered power spectrum after GPR cleaning.
+
+Across the k range, the recovered power spectrum lies above the true HI signal, revealing there is residual foreground contribution. This is not unexpected given the poorly constrained foreground hyperparameters discussed above, and is a commonly reported limitation of GPR in the literature. 
+
+At small k, which refers to large scales, the residual foreground is the most pronounce. This is consistent with the face that foregrounds are most dominant at low frequencies. A systematic offset persists across the full k range, indicating the foreground removal is incomplete. 
+
+The cylindrical power spectrum provides some more information on the foreground removal by separating modes along the line of sight ($k_{\parallel}$) from transverse modes ($k_{\perp}$). \Cref{fig:cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1} shows the true HI power spectrum, the residual signal from the GPR clean, and their ratio. 
+
+In the HI power spectrum panel, power is distributed relatively uniformly across the plane, with the highest power at low ($k_{\perp}$) and low ($k_{\parallel}$) as expected. After foreground removal, the middle panel is much brighter in comparison, especially at low k modes, showing that GPR has failed to subtract the foreground emission. This reveals that GPR struggles to fully separate the foreground and HI signal at these small scales.
+
+The ratio panel makes this even more clear. At high $k_{\parallel}$, the ratio which is red is near to a value of 9, indicating the residual spectrum has more power than the true HI signal. At low $k_{\parallel}$, the ratio turns blue which is near to a value of 3. While the subtraction is still not ideal, this shows that GPR cleans the low $k_{\parallel}$ modes better than high $k_{\parallel}$. 
+
+\subsubsection{Overall Performance}
+
+\begin{figure*}[bt!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week8/cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1}
+\end{figure*}
+
+The GPR foreground removal demonstrates partial but incomplete recovery of the HI power spectrum. This method successfully reduced the foreground contamination, and the recovered hyperparameters are broadly consistent with the injected true values or what is physically expected. However, residual foreground remains, particularly at high $k_{\parallel}$. This is likely due to the poorly constrained foreground lengthscale and the narrow frequency bandwidth of the simulated dataset. Both of these may have contributed and limited GPR's ability to clean and identify the two components individually. 

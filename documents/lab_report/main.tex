@@ -1,12 +1,11 @@
 \documentclass[
     a4paper, % Paper size, use either a4paper or letterpaper
     10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
-    unnumberedsections, % Comment to enable section numbering
+    %unnumberedsections, % Comment to enable section numbering
 ]{LTJournalArticle}
 
 \usepackage{subfig}
 \usepackage{amsmath}
-\usepackage{cleveref}
 \usepackage{stfloats}
 \usepackage[final]{hyperref}
 \hypersetup{
@@ -15,6 +14,7 @@
     citecolor=blue,
     urlcolor=blue
 }
+\usepackage[nameinlink, noabbrev]{cleveref}
 
 %\runninghead{Sting Operation: WASP-135b in Transit} % A shortened article title to appear in the running head, leave this command empty for no running head
 
@@ -56,7 +56,7 @@
 
                                          
 \begin{abstract}
-The LHCb experiment at CERN investigates charge-parity (CP) violation to better understand the observed matter-antimatter asymmetry in the Universe. Its Ring Imaging Cherenkov (RICH) detectors identify charged particles using Cherenkov radiation, but the higher luminosity planned for Upgrade II requires new detector configurations which can maintain performance under the harsh conditions. Two critical benchmarks are defined: an overall Cherenkov angle resolution better than 0.5\,mrad and an occupancy below 30\,\%. This study simulated 24 detector configurations, investigating contributions of emission point, chromatic dispersion, and pixel size on the resolution. Six configurations achieved the resolution benchmark, and two were selected for detail occupancy studies. Of these, only the configuration using an LAPPD photodetector with a 250\,nm wavelength cut-off and 1.4\,mm pixel size satisfied both benchmarks. 
+Neutral hydrogen (HI) 21\,cm intensity mapping is a promising probe of the large-scale structure of the Universe, but is contaminated by foreground emission several orders of magnitude brighter than the cosmological signal. This work compares Principal Component Analysis (PCA) and Gaussian Process Regression (GPR) for foreground removal methods in simulated 21\,cm intensity mapping. PCA successfully recovered the HI power spectrum after removing three principal components, with residuals consistent with the true signal after applying minimum mode thresholds of $k_{\perp}$ = 0.1\,Mpc$^{-1}$ and $k_{\parallel}$ = 0.1\,Mpc$^{-1}$. GPR, using an exponential kernel for the HI signal and a spectral-index-modified RBF kernel for the foreground, yielded incomplete foreground removal due to poorly constrained foreground hyperparameters. While PCA outperforms GPR for this idealised simulation by leveraging the statistical structure in the data, GPR's ability to propagate uncertainties and incorporate physical priors may be a valuable asset for next-generation surveys with MeerKAT.
 \end{abstract}
 
 
@@ -93,7 +93,7 @@ The LHCb experiment at CERN investigates charge-parity (CP) violation to better 
 \input{documents/lab_report/sections/03_foreground_removal_methods}
 %\input{documents/lab_report/sections/04_methodology}
 \input{documents/lab_report/sections/05_results}
-\input{documents/lab_report/sections/06_discussion}
+%\input{documents/lab_report/sections/06_discussion}
 \input{documents/lab_report/sections/07_conclusion}
 
 %------------------------------------------------
@@ -109,6 +109,7 @@ The LHCb experiment at CERN investigates charge-parity (CP) violation to better 
 %\bibliographystyle{unsrt}
 \printbibliography
 
+\onecolumn
 \appendix
 \addcontentsline{toc}{section}{Appendix}
 \input{documents/lab_report/appendices/appendix_a}
