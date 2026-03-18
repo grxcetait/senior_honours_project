@@ -204,16 +204,16 @@ In practice, there are various methods to be used to determine the optimal hyper
 
 \begin{figure*}[ht!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week5/cylindrical_power_spectrum_hi_map.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week5/cylindrical_power_spectrum_[0, 0.06]_None.pdf}
     \caption{The cylindrical power spectra for the HI signal, the residual total signal (HI signal and foreground) after foreground removal, and the ratio between the residual signal and the HI signal, from left to right.}
-    \label{fig:cylindrical_power_spectrum_hi_signal}
+    \label{fig:ccylindrical_power_spectrum_[0, 0.06]_None}
 \end{figure*}
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_[0.025, 0.1]_None.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week9/1d_log_power_spectrum_[0, 0.04]_None_both.pdf}
     \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
-    \label{fig:log_power_spectrum_hi_signal}
+    \label{fig:1d_log_power_spectrum_[0, 0.04]_None_both}
 \end{figure}
 
 On the other hand, Nested Sampling is designed specifically to calculate the marginal likelihood and is good at handling data with several separate peaks with high likelihoods. This, however, is highly complex and much more computationally expensive. MCMC Sampling provide a full posterior showing the probability distribution and correlation between parameters. They are also better at finding the global peak as it explores parameter space. This method takes much longer than standard optimisation techniques but runs quicker than Nested Sampling, thus, being a middle ground between the two methods. 
