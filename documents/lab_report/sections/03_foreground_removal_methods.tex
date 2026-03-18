@@ -1,4 +1,7 @@
 \section{Foreground Removal Methods}
+\label{sec:foreground_removal_methods}
+
+This section describes the theory and the methodology of the two foreground removal methods: Principal Component Analysis (PCA) and Gaussian Process Regression (GPR). For both methods, the recovered power spectra are used to diagnose and assess the foreground cleaning and the residual signal. The spherically averaged 1D power spectrum takes the average of all the different $k$ modes, assuming statistical isotropy where the Universe looks the same in all directions on average. The log is taken as the power spectrum spans many orders of magnitude across the $k$ range, particularly where the foreground contributes significant amounts of power at low $k$. This makes it easier to see the shape and relative difference across scales. However, directional information about the signal is lost through the averaging process. To recover this valuable information, the cylindrical power spectrum is also computed, providing more information on the total signal by separating modes along the line of sight ($k_{\parallel}$) from transverse modes ($k_{\perp}$). This power spectrum separates the wave-vector \textbf{k} into its components $k_\perp$, corresponding to the spatial fluctuations across the sky which are perpendicular to the line-of-sight, and $k_\parallel$, corresponding the the frequency-dependent fluctuations along the line-of-sight. Together, these two diagnostics provide a complete picture of foreground removal performance across all scales.
 
 \subsection{Principal Component Analysis}
 
@@ -14,25 +17,25 @@ Principal Component Analysis (PCA) is a blind foreground removal method which re
 
 %where \textbf{A} is the mixing matrix, containing the amplitude of the $N_{FG}$ separable components \textbf{s} , and $\epsilon$ is the residual signal. 
 
-\begin{figure}[th!]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=1\linewidth]{figures/eigenvectors.pdf}
     \caption{A plot showing the eigenvector modes versus frequency of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
     \label{fig:eigenvectors}
 \end{figure}
 
-\begin{figure}[th!]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week4/eigenvalues.pdf}
     \caption{A plot showing the eigenvalues versus eigenvalue index of the mock data with the total signal consisting of the 21\,cm signal and foreground.}
     \label{fig:eigenvalues}
 \end{figure}
 
-In this basis, the first few modes, known as the principal components, contain the signal with the largest amplitude and are strongest in frequency. By generating mock data from theory using meer21cm, a HI IM was generated for a total signal consisting of the 21\,cm signal and the foregrounds. This data was generated using a fixed seed for random number generation, producing one realisation. 
+The foreground-cleaned data is then obtained by projecting our the $N_{FG}$ eigenmodes associated with the largest eigenvalues. Here, the underlying assumption is that the foreground emission dominates the largest variance modes, so that projecting them out leaves a residual signal dominated by the 21\,cm contribution. By identifying and removing the principal components which correspond to the foreground $N_{FG}$, foreground cleaning can be performed. While effective, this foreground cleaning can also remove some HI signal modes which overlap with the foreground, or leave behind some residual foreground contamination in the cleaned data. 
 
-The frequency-frequency covariance of this signal was obtained, along with the eigenvectors and eigenvalues seen in \Cref{fig:eigenvectors} and \Cref{fig:eigenvalues}. By identifying and removing the principal components which correspond to the foreground $N_{FG}$, foreground cleaning can be performed. While effective, this foreground cleaning can also remove some HI signal modes which overlap with the foreground, or leave behind some residual foreground contamination in the cleaned data. 
+By generating mock data from theory using meer21cm, a HI IM was generated for a total signal consisting of the 21\,cm signal and the foregrounds. The eigenvectors and eigenvalues of the total signal covariance are shown in \Cref{fig:eigenvectors} and \Cref{fig:eigenvalues}. The first two eigenvectors are visibly spectrally smooth, consistent with the expected frequency structure of synchrotron and free-free foreground emission. The remaining eigenvectors exhibit rapid frequency oscillations characteristic of the 21\,cm signal and noise. The eigenvalue spectrum shows a sharp drop of approximately 10-11 orders of magnitude after the third eigenvalue, after which the spectrum plateaus at a much lower level. This separation provides justification for the choice of $N_{FG} = 3$, as the first three modes capture the foreground-dominated variance while the remaining modes are consistent with the HI signal. This break in the eigenvalue spectrum is the key diagnostic used to select $N_{FG}$ in practice.
 
-The first few eigenvectors are spectrally smooth, exhibiting the smooth characteristic expected from the foreground. Additionally, the first three eigenvalue modes are the largest and correspond to the foreground. Therefore, $N_{FG} = 3$ principal components were removed from the total signal to perform the foreground cleaning. This value was chosen to maximise foreground suppression while minimising the loss of the HI signal. 
+%The first few eigenvectors are spectrally smooth, exhibiting the smooth characteristic expected from the foreground. Additionally, the first three eigenvalue modes are the largest and correspond to the foreground. Therefore, $N_{FG} = 3$ principal components were removed from the total signal to perform the foreground cleaning. This value was chosen to maximise foreground suppression while minimising the loss of the HI signal. 
 
 %To recover the desired cosmological information, the equation is rearrange to isolate the residuals: 
 
@@ -40,23 +43,23 @@ The first few eigenvectors are spectrally smooth, exhibiting the smooth characte
 %    \epsilon = \textbf{d} - \textbf{As}.
 %\end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_None_None.pdf}
-    \caption{Enter Caption}
-    \label{fig:1d_log_power_spectrum_None_None}
-\end{figure}
+%\begin{figure}[t!]
+%    \centering
+%    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_None_None.pdf}
+%    \caption{Enter Caption}
+%    \label{fig:1d_log_power_spectrum_None_None}
+%\end{figure}
 
-\begin{figure}
+\begin{figure*}[t!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week3/cylindrical_power_spectrum_None_None.pdf}
     \caption{Enter Caption}
     \label{fig:cylindrical_power_spectrum_None_None}
-\end{figure}
+\end{figure*}
 
-From the HI map, the 1D and cylindrical power spectrum were extracted and can be seen in \Cref{fig:1d_log_power_spectrum_None_None}. The cylindrical power spectrum separates the wave-vector \textbf{k} into its components $k_\perp$, corresponding to the spatial fluctuations across the sky which are perpendicular to the line-of-sight, and $k_\parallel$, corresponding the the frequency-dependent fluctuations along the line-of-sight.
+To evaluate the foreground removal, the ratio of the true HI power spectrum, the residual signal, and their ratio was plotted, seen in \Cref{fig:cylindrical_power_spectrum_None_None}. By inspecting the ratio panel, the components of the wave-vector which experienced signal loss were identified. We can see that the for the most part of the panel, the pixels are red, indicating a ratio of unity which means that the HI power spectrum has successfully been recovered. However, at low $k_{\parallel}$ and $k_{\perp}$, we can see this ratio goes below 1.0, revealing signal loss. 
 
-To evaluate the foreground removal, the ratio of the HI cylindrical power spectrum and the residual signal power spectrum was plotted, seen in \Cref{fig:cylindrical_power_spectrum_None_None}. By inspecting this ratio, the components of the wave-vector which experienced signal loss were identified. These regions were used to define minimum thresholds for modes during foreground cleaning, minimising the HI signal loss. 
+By inspecting this ratio panel, the components of the wave-vector which experienced signal loss were identified. This was done by inspection, seeing where the blue pixels were and then trying different combinations of $k$ values, increasing with precision. An initial minimum threshold of $k_{\parallel} = 0.025$ and $k_{\perp} = 0.1$ and different values with a higher precision were tested around these values. Finally, a region of $k_{\parallel} = ???$ and $k_{\perp} = ???$ was defines for the minimum threshold for PCA cleaning, removing the modes with the HI signal loss.
 
 Finally, foreground cleaning was performed again using these minimum thresholds of the wave-number components. The 1D power spectrum was then extracted again and compared to the theory. This was repeated for 100 realisations by passing in various seed numbers, allowing the many different but equally likely outcomes of the mock data to be generated and used to quantify uncertainty. 
 
@@ -101,7 +104,7 @@ where $\Gamma$ is the gamma function, $K_\eta$ is the modified Bessel function. 
     \item \textbf{Spectral parameter $\eta$:} this determines the smoothness of the function. Since the foregrounds are smooth in frequency and the HI signal is more Gaussian, $\eta$ is expected to be larger for the foregrounds than for the HI signal (see \Cref{fig:frequency_vs_temperature}).
 \end{itemize}
 
-By choosing different values for the spectral parameter $\eta$, the Matern kernel can simplify. Some different choices for this hyperparameter are:
+By choosing different values for the spectral parameter $\eta$, the Matern kernel can simplify. This project will use two choices for this hyperparameter:
 
 % [4] https://arxiv.org/abs/2010.15892
 % [5] https://academic.oup.com/mnras/article/493/2/1662/5727337#sec3
@@ -114,12 +117,12 @@ By choosing different values for the spectral parameter $\eta$, the Matern kerne
     \begin{equation}
         K(\nu, \nu') = \sigma^2 exp(\frac{(\nu - \nu')^2}{2l^2})
     \end{equation}
+
+     %\item \textbf{$\eta = 5/2$:} the Matern kernel is not quite as smooth in frequnecy as the RBF kernel but is still relatively smooth. This kernel was used to model the smooth foreground component by [7].
     
-    \item \textbf{$\eta = 5/2$:} the Matern kernel is not quite as smooth in frequnecy as the RBF kernel but is still relatively smooth. This kernel was used to model the smooth foreground component by [7].
+    %\item \textbf{$\eta = 3/2$:} the Matern kernel is even less smooth in frequency and can be used to describe foreground components with moderate frequency smoothness. This was done by [5] and [7].
     
-    \item \textbf{$\eta = 3/2$:} the Matern kernel is even less smooth in frequency and can be used to describe foreground components with moderate frequency smoothness. This was done by [5] and [7].
-    
-    \item \textbf{$\eta = 1/2$:} the Matern kernel is the least smooth in frequency and simplifies tot eh exponential function. It is not smooth at all which makes it a strong match for signals that vary significantly with frequency, such as the HI signal. This is used to describe the HI signal by [4], [5], [6], and [7] and has the form: 
+    \item \textbf{$\eta = 1/2$:} the Matern kernel is the least smooth in frequency and simplifies to the exponential function. It is not smooth at all which makes it a strong match for signals that vary significantly with frequency, such as the HI signal. This is used to describe the HI signal by [4], [5], [6], and [7] and has the form: 
 
     \begin{equation}
         K_{exp}(\nu, \nu') = \sigma^2exp(\frac{|\nu - \nu'|}{l})
@@ -150,10 +153,75 @@ The versatility of the Matern kernel makes it a strong tool for various signals.
     \label{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance}
 \end{figure}
 
-To demonstrate what the exponential and RBF kernel functions look like, both are presented in two cases: one with a low variance and low lengthscale ($\sigma = 1$, $l = 10$), and another with a high variance and high lengthscale ($\sigma = 100$, $l = 100$). In \Cref{fig:exp_kernel_lengthscales} and \Cref{fig:rbf_kernels_lengthscales}, increasing the lengthscale $l$ changes the correlation of the signal. Increasing the value of $l$ results in a smoother functions, while a smaller value of $l$ results in a function with more fluctuations.
+To demonstrate what the exponential and RBF kernel functions look like, both are presented in two cases: one with a low variance and low lengthscale ($\sigma = 1$, $l = 1$), and another with a high variance and high lengthscale ($\sigma = 100$, $l = 100$). In \Cref{fig:exp_kernel_lengthscales} and \Cref{fig:rbf_kernels_lengthscales}, increasing the lengthscale $l$ changes the correlation of the signal. Increasing the value of $l$ results in a smoother functions, while a smaller value of $l$ results in a function with more fluctuations. It can also be seen that increasing the variance changes the amplitude of the covariance, shown in the colour bars.
 
-We can see that the RBF function has a much wider diagonal in the case of high variance and high lengthscale ($\sigma = 100$, $l = 100$). A wider diagonal means that the data is much more correlated in frequency. A smaller diagonal means that the data points are less correlated in frequency and are mainly correlated with themselves and the points directly around them. It can also be seen that increasing the variance changes the amplitude of the covariance, shown in the colour bars
+By comparing these plots (\Cref{fig:exp_kernel_lengthscales}, \Cref{fig:rbf_kernels_lengthscales}) to our covariance for the foreground and HI signal (\Cref{fig:tot_fg_hi_covariance}), we can see which kernel functions would best represent each signal. 
 
-From these plots, 
+We can see that the RBF function has a much wider diagonal in both cases. A wider diagonal means that the data is much more correlated in frequency. A smaller diagonal means that the data points are less correlated in frequency and are mainly correlated with themselves and the points directly around them. 
+
+By inspection, we can tell that the exponential kernel function with low $\sigma$ and low $l$ would be the best fit for the 21\,cm signal while the RBF function with a high $\sigma$ and high $l$ would best fit the foreground component. However, while the amplitude of the RBF covariance matches that of the foreground, the RBF covariance has diagonal symmetry that is not seen in the foreground. In order for the shape of the RBF function to match this foreground signal better, we can add a spectral index parameter $\gamma$ so the signal can scale according to frequency $T(f) = T_0(f_0) * (f / f_0) ^ \gamma$. This makes the RBF kernel function now: 
+
+\begin{equation}
+    K(\nu, \nu') = \sigma^2 exp(\frac{(\nu - \nu')^2}{2l^2})(\frac{\nu}{\nu_0})^\gamma(\frac{\nu'}{\nu'_0})^\gamma
+\end{equation}
+
+where $\nu_0$ and $\nu'_0$ is the first frequency value in the range. The application of this can be seen in \Cref{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance} where we can see that this addition for the RBF kernel to mimic the reality that the foregrounds are much brighter at lower frequencies. 
+
+% [1] https://arxiv.org/pdf/2105.12665
+The goal is to find the kernel functions which best mimic the different components of the data which are the foreground, 21\,cm signal and noise. There are a couple of ways to handle noise in GPR. Since the noise is so small in amplitude and so highly correlated in frequency, it can be treated as indistinguishable noise as done by [1]. This assumes there is either no noise present in the data, or the noise is indistinguishable from the other signals which means that the covariance functions of the other signals describes and captures the noise. It is important to noise that this data is idealised and real data would likely results in much more complex instrumental noise which would require a more rigorous treatment.
 
 \subsubsection{Hyperparameter optimisation and model selection}
+
+Model selection for GPR is a two step process which are interdependent. The first step is to choose the kernel function that best models the data, and the second is to optimise the hyperparameters of this function. This can be done with a Bayesian approach by computing the marginal likelihood and selecting the model that maximises this. This represents the probability of the data given some hyperparameters $\theta$. By integrating the likelihood $\mathcal{L}$ multiplied by the prior over the GP realisations $x$, the Log-Marginal Likelihood (LML) can be obtained: 
+
+%It is important to pick the kernel function which performs the best along with their most optimal hyperparameters that best model the signals. These two steps are mutually dependent. So, although we have found kernel function which match our data by inspection, we much compare the overall performance of each model. This will be done by first optimising the hyperparameters of each kernels by maximising their marginal likelihoods. This will then be compared to other optimised kernel functions. 
+
+%To evaluate each model, the marginal likelihood, also known as the Bayesian evidence, was computed. This represents the probability of the data given some hyperparameters $\theta$. By integrating the likelihood $\mathcal{L}$ multiplied by the prior over the GP realisations $x$, the Log-Marginal Likelihood (LML) can be obtained: 
+
+%For a kernel function with hyperparameters $\theta$, the marginal likelihood of the data can be calculated by integrating the data likelihood $\mathcal{L}$ multiplied by the prior. 
+
+%\begin{equation}
+%    p(d|\nu, \theta) = \int \mathcal{L}(d|x, \nu, \theta) p(x|\nu, \theta) dx
+%\end{equation}
+
+\begin{equation}
+    \log p(d|\nu, \theta) = -\frac{1}{2} d^T K^{-1}d - \frac{1}{2} \log|K| - \frac{n}{2} \log 2\pi
+\end{equation}
+
+where $n$ is the number of data points sampled, and K is the total kernel function of the data. The LML can be computed analytically since the assumption was made that each component of the data is a GP and the noise is Gaussian distributed. 
+
+To compare the performance of various models with each other, the Bayes factor $\mathcal{Z}$ can be computed. This is the ratio of two marginal likelihoods but since the log has been taking, the log of the Bayes factor is computed by taking the difference between the LML of two models: 
+
+\begin{equation}
+    \log \mathcal{Z} = LML_{method_1} - LML_{method_2}
+\end{equation}
+
+where a larger value of $\mathcal{Z}$ or $\log \mathcal{Z}$ means that the first model fits the data better than the second model.
+
+% [1] https://academic.oup.com/mnras/article/493/2/1662/5727337#199912059
+% [2] https://arxiv.org/pdf/2105.12665
+In practice, there are various methods to be used to determine the optimal hyperparameters of kernel functions such as: standard optimisation, Monte Carlo Markov Chain (MCMC) methods as used by [1], or Nested Sampling as used by [2]. While standard optimisation methods, such as gradient descent used by [2] or scipy.optimize.minimize which provides various minimisation algorithms, they are able to find the optimal hyperparameters incredibly quick and are not computationally expensive, they have a few limitations. They are prone to getting stuck in local minima and are sensitive to initial guesses so if the priors are far off, the algorithm might fail or converge to values which are incorrect. Additionally, these methods only gives the best values without any uncertainty or probability or likelihoods. 
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week5/cylindrical_power_spectrum_hi_map.pdf}
+    \caption{The cylindrical power spectra for the HI signal, the residual total signal (HI signal and foreground) after foreground removal, and the ratio between the residual signal and the HI signal, from left to right.}
+    \label{fig:cylindrical_power_spectrum_hi_signal}
+\end{figure*}
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week3/1d_log_power_spectrum_[0.025, 0.1]_None.pdf}
+    \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
+    \label{fig:log_power_spectrum_hi_signal}
+\end{figure}
+
+On the other hand, Nested Sampling is designed specifically to calculate the marginal likelihood and is good at handling data with several separate peaks with high likelihoods. This, however, is highly complex and much more computationally expensive. MCMC Sampling provide a full posterior showing the probability distribution and correlation between parameters. They are also better at finding the global peak as it explores parameter space. This method takes much longer than standard optimisation techniques but runs quicker than Nested Sampling, thus, being a middle ground between the two methods. 
+
+Therefore, a standard optimisation method using scipy.optimize.minimize will be used to optimise the various kernel functions and obtain LMLs. These LMLs will be compared between different kernel functions in order to find the one that fits the data the best. Then, on these kernel functions, MCMC Sampling will be used to obtain a more robust evaluation on the hyperparameters and their uncertainties. 
+
+For the scipy.optimize.minimize method, initial guesses must be provided for the algorithm to start on. These intial guesses are important as the algorithm is sensitive to this and an incorrect starting point may result in a final value which is unphysical. These initial guesses were taken by fitting different values of the lengthscale $l$ and variance $\sigma$ to the kernels to try to mimic the true covariance of the signal components. For example, we know the 21\,cm signal is very tightly and strongly correlated in frequency (see \Cref{fig:tot_fg_hi_covariance}) so a smaller $l$ and smaller $\sigma$ would be suitable with the exponential kernel (see \Cref{fig:exp_kernel_lengthscales}). On the other hand, the foreground is very smooth in frequency and high in amplitude (see \Cref{fig:tot_fg_hi_covariance})so the RBF kernel with high $l$, high $\sigma$ and a spectral index would be most suitable(see \Cref{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance}).
+
+In addition to this, bounds must be set for each of the hyperparameters for both of these methods. This means that the algorithms will not explore any values that are unphysical. Again, these are chosen of what would be appropriate by inspection of the kernel functions and with knowledge of the data. For example, we know that the spectral index must be negative otherwise the amplitude would increase with frequency and that is the opposite of what we see. A reasonable range around the initial guesses would be a suitable choice. 
+
+%\subsubsection{Bias corrections}
