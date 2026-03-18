@@ -31,33 +31,12 @@ Overall, the PCA foreground removal performs well within the defined $k$ thresho
 
 Here, we will discuss the results of foreground removal using GPR. First, we will go over the hyperparameter estimations that came as a result of MCMC Sampling along with the MCMC convergence. Then, we will discuss the results from the foreground removal which is the 1D and cylindrical power spectrum. Finally, we will finish with a review on the overall performance of GPR.
 
-%\begin{figure}[bt!]
-%    \centering
-%    \includegraphics[width=1\linewidth]{outputs/week8/hi_signal_kernal_comparison_mcmc_with_sp_indx_fg_1.pdf}
-%    \caption{Enter Caption}
-%    \label{fig:hi_signal_kernal_comparison_mcmc_with_sp_indx_fg_1}
-%\end{figure}
-
 \begin{figure*}[t!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week9/kernel_comparison_scipy_with_no_noise_and_sp_indx.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week8/kernel_comparison_mcmc_with_sp_indx_no_noise.pdf}
     \caption{Enter Caption}
     \label{fig:placeholder}
 \end{figure*}
-
-%\begin{figure}[t!]
-%    \centering
-%    \includegraphics[width=1\linewidth]{outputs/week8/hi_signal_kernal_comparison_mcmc_with_sp_indx_fg_1.pdf}
-%    \caption{Enter Caption}
-%    \label{fig:placeholder}
-%\end{figure}
-
-%\begin{figure}[t!]
-%    \centering
-%    \includegraphics[width=1\linewidth]{outputs/week8/fg_signal_kernal_comparison_mcmc_with_sp_indx_fg_1.pdf}
-%    \caption{Enter Caption}
-%    \label{fig:placeholder}
-%\end{figure}
 
 \subsubsection{Hyperparameter Estimation}
 
@@ -78,20 +57,6 @@ Here, we will discuss the results of foreground removal using GPR. First, we wil
     \end{tabular}
 \end{table*}
 
-\begin{figure*}[h!]
-    \centering
-    \includegraphics[width=0.7\linewidth]{outputs/week8/mcmc_corner_plot_with_sp_indx_fg_1.pdf}
-    \caption{Enter Caption}
-    \label{fig:mcmc_corner_plot_with_sp_indx_fg_1}
-\end{figure*}
-
-\begin{figure*}[h!]
-    \centering
-    \includegraphics[width=0.7\linewidth]{outputs/week8/mcmc_chain_with_sp_indx_fg_1.pdf}
-    \caption{Enter Caption}
-    \label{fig:mcmc_chain_with_sp_indx_fg_1}
-\end{figure*}
-
 The posterior distributions of the GPR hyperparameters were explored using MCMC sampling, with the resulting corner plot shown in \Cref{fig:mcmc_corner_plot_with_sp_indx_fg_1}. The model includes five hyperparameters: the amplitude and the length scale of the HI signal kernel and the foreground kernel ($\sigma_{HI}$, $\sigma_{fg}$, $\mathcal{l_{HI}}$, $\mathcal{l_{fg}}$), and the foreground spectral index ($\gamma$). All together, these parameters control how the GPR model separates the spectrally smooth foreground from the HI signal which varies rapidly with frequency. A summary of the recovered hyperparameter values can be seen in \Cref{tab:hyperparameters}. 
 
 The HI amplitude $\sigma_{HI}$ is recovered as 0.0013$^{+0.1472}_{-0.0914}$, which is tightly constrained and suggests that the GPR model is correctly identifying the amplitude of the HI fluctuations even in the presence of foreground contamination. 
@@ -104,25 +69,39 @@ The foreground lengthscale $l_{fg}$ is recovered as 737.15$^{+184.61}_{-245.01}$
 
 Finally, the foreground spectral index $\gamma$ is recovered as -2.9153$^{+1.0433}_{-1.1075}$ with a broad posterior and the injected true value of -2.7 being within the uncertainties. While this median value is consistent with the expected behaviour, the wide posterior reflects the difficulty of constraining the spectral shape which is possibly due to the relatively narrow frequency range. The diffuse joint posterior for $l_{fg}$ and $\gamma$ in the corner plot suggests that the data cannot distinguish between the different combinations of these hyperparameters. This physically makes sense as a steeper $\gamma$ and a longer $l_{fg}$ can produce similar foreground covariance structures, resulting in these hyperparameters being difficult to constrain independently.
 
+\begin{figure*}[t!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week9/gpr_cylindrical_scipy_with_no_noise_and_sp_indx.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure*}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week9/final_power_spectrum_1.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
 The MCMC trace plots for all five hyperparameters are shown in \Cref{fig:mcmc_chain_with_sp_indx_fg_1}. Trace plots are important in MCMC as they verify that the chains have converged and they explore the parameter space efficiently. Each coloured line represents an individual walker's trajectory through parameter space over 10,000 steps. For a well-converged sampler where the walkers efficiently explore the posterior distribution, the traces should be dense bands that are stationary, meaning the chain has converged around a mean with variance variance with no upward or downward trends. 
 
 For all hyperparameters, the plots demonstrate good mixing across all walkers. The HI signal hyperparameters ($\sigma_{HI}$, $l_{HI}$) are well converged and stable, consistent with the constrained posteriors seen in the corner plot. However, the foreground parameters ($\sigma_{fg}$, $l_{fg}$, $\gamma$), in particular the spectral index and lengthscale, show the walkers exploration a wide range of values throughout the run. While these chains do not show any systematic drift and appear stationary, this large spread is consistent with the broad, poorly constrained posteriors seen in the corner plot. This confirms the degeneracies the foreground model posses and that the difficulty in constraining these hyperparameters is a feature of the posterior landscape rather than the sampler failing to converge. 
 
 \subsubsection{Power Spectra}
 
-%\begin{figure}[bt!]
-%    \centering
-%    \includegraphics[width=1\linewidth]{outputs/week8/log_1d_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
-%    \caption{Enter Caption}
-%    \label{fig:log_1d_power_spectrum_mcmc_with_sp_indx_fg_1}
-%\end{figure}
-
-\begin{figure}
+\begin{figure*}[h!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week9/final_power_spectrum_with_sp_indx.pdf}
+    \includegraphics[width=0.75\linewidth]{outputs/week9/final_power_spectrum_1.pdf}
     \caption{Enter Caption}
     \label{fig:placeholder}
-\end{figure}
+\end{figure*}
+
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{outputs/week8/mcmc_chain_with_sp_indx_fg_no_noise.pdf}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure*}
 
 The spherically averaged log 1D power spectrum before and after GPR foreground removal is shown in \Cref{fig:log_1d_power_spectrum_mcmc_with_sp_indx_fg_1}. The blue curve represents the true HI power spectrum whereas the red dashed curve shows the recovered power spectrum after GPR cleaning.
 
@@ -137,19 +116,5 @@ In the HI power spectrum panel, power is distributed relatively uniformly across
 The ratio panel makes this even more clear. At high $k_{\parallel}$, the ratio which is red is near to a value of 9, indicating the residual spectrum has more power than the true HI signal. At low $k_{\parallel}$, the ratio turns blue which is near to a value of 3. While the subtraction is still not ideal, this shows that GPR cleans the low $k_{\parallel}$ modes better than high $k_{\parallel}$. 
 
 \subsubsection{Overall Performance}
-
-%\begin{figure*}[bt!]
-%    \centering
-%    \includegraphics[width=1\linewidth]{outputs/week8/cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
-%    \caption{Enter Caption}
-%    \label{fig:cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1}
-%\end{figure*}
-
-\begin{figure*}[t!]
-    \centering
-    \includegraphics[width=1\linewidth]{outputs/week9/gpr_cylindrical_scipy_with_no_noise_and_sp_indx.pdf}
-    \caption{Enter Caption}
-    \label{fig:placeholder}
-\end{figure*}
 
 The GPR foreground removal demonstrates partial but incomplete recovery of the HI power spectrum. This method successfully reduced the foreground contamination, and the recovered hyperparameters are broadly consistent with the injected true values or what is physically expected. However, residual foreground remains, particularly at high $k_{\parallel}$. This is likely due to the poorly constrained foreground lengthscale and the narrow frequency bandwidth of the simulated dataset. Both of these may have contributed and limited GPR's ability to clean and identify the two components individually. 
