@@ -138,11 +138,18 @@ The ratio panel makes this even more clear. At high $k_{\parallel}$, the ratio w
 
 \subsubsection{Overall Performance}
 
-\begin{figure*}[bt!]
+%\begin{figure*}[bt!]
+%    \centering
+%    \includegraphics[width=1\linewidth]{outputs/week8/cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
+%    \caption{Enter Caption}
+%    \label{fig:cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1}
+%\end{figure*}
+
+\begin{figure*}[t!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week8/cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week9/gpr_cylindrical_scipy_with_no_noise_and_sp_indx.pdf}
     \caption{Enter Caption}
-    \label{fig:cylindrical_power_spectrum_mcmc_with_sp_indx_fg_1}
+    \label{fig:placeholder}
 \end{figure*}
 
 The GPR foreground removal demonstrates partial but incomplete recovery of the HI power spectrum. This method successfully reduced the foreground contamination, and the recovered hyperparameters are broadly consistent with the injected true values or what is physically expected. However, residual foreground remains, particularly at high $k_{\parallel}$. This is likely due to the poorly constrained foreground lengthscale and the narrow frequency bandwidth of the simulated dataset. Both of these may have contributed and limited GPR's ability to clean and identify the two components individually. 
