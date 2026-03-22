@@ -68,14 +68,14 @@ Finally, foreground cleaning was performed again using these minimum thresholds 
 
 % [1] https://link.springer.com/chapter/10.1007/978-3-540-28650-9_4
 % [2] https://mc-stan.org/docs/2_38/stan-users-guide/gaussian-processes.html#:~:text=Unlike%20a%20simple%20multivariate%20normal,mean%20function%20and%20covariance%20function.
-In Gaussian Process Regression (GPR), the various components of the signal, the foreground, 21\,cm signal, and noise, are modelled as realisations of a Gaussian Process (GP) [1]. A GP is a Gaussian distribution extended to infinite dimensions. While a standard multivariate Gaussian distribution describes a finite set of variables, a GP expands this to an infinite number of variables. In this context, instead of describing discrete points, the distribution describes continuous functions over a range of frequencies $\nu$. Consequently, Gaussian Processes provides a probability distribution over a space of possible functions. 
+In Gaussian Process Regression (GPR), the various components of the signal, the foreground, 21\,cm signal, and noise, are modelled as realisations of a Gaussian Process (GP) \cite{rasmussenGaussianProcessesMachine2004}. A GP is a Gaussian distribution extended to infinite dimensions. While a standard multivariate Gaussian distribution describes a finite set of variables, a GP expands this to an infinite number of variables. In this context, instead of describing discrete points, the distribution describes continuous functions over a range of frequencies $\nu$. Consequently, Gaussian Processes provides a probability distribution over a space of possible functions. 
 
 Contrasting to multivariate Gaussian distributions, which is defined by a mean vector and covariance matrix, a GP is defined by a mean function and a covariance function. In this case, each element of the mean is a function of frequency and the covariance function is defined by a kernel which means they are easy to sample from. A kernel, also known as a covariance function or kernel function, defines the shape of the functions by determining the relationship between different points in the data and is the set of functions considered for the data. It specifies which functions are likely under the GP prior. This, then, determines the generalisation properties of the model.
 
 GPR operates in a similar way as regression with parametric models, with the main distinction being that a prior is put on the the kernel, where conventionally the prior has a mean of zero, instead on the specific model coefficients. GPR is a non-parametric regression technique. This means it is able to estimate relationships between variables without assuming a predefined function form, such as the data being linear or quadratic. Instead, the model is constructed directly from information derived from the data, making it useful for complex, unknown, or non-linear datasets. 
 
 % [3] https://arxiv.org/pdf/2102.01697
-Another advantage of GPs is that a GP is stochastic which mean that each extraction is random and can take any functional form consistent with the mean and kernel function. Assuming only Gaussian noise is present, they also have a well defined marginal likelihood function, so it is easy to compute the probability of data conditioned on a given value of the mean and kernel functions [3]. This can be maximised to find the optimal values of the model parameters or be used to evaluate the posterior which is very useful for inference problems.
+Another advantage of GPs is that a GP is stochastic which mean that each extraction is random and can take any functional form consistent with the mean and kernel function. Assuming only Gaussian noise is present, they also have a well defined marginal likelihood function, so it is easy to compute the probability of data conditioned on a given value of the mean and kernel functions \cite{lugerMappingStellarSurfaces2021}. This can be maximised to find the optimal values of the model parameters or be used to evaluate the posterior which is very useful for inference problems.
 
 Although, a larger amount of data is required to work well and in order to achieve the same level of uncertainty as a parametric model. Additionally, it poses a higher risk of over fitting, slower to compute and can be difficult to interpret. 
 
@@ -196,13 +196,6 @@ where $n$ is the number of data points sampled, and K is the total kernel functi
     \caption{The cylindrical power spectra for the HI signal, the residual total signal (HI signal and foreground) after foreground removal, and the ratio between the residual signal and the HI signal, from left to right.}
     \label{fig:ccylindrical_power_spectrum_[0, 0.06]_None}
 \end{figure*}
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=1\linewidth]{outputs/week9/1d_log_power_spectrum_[0, 0.04]_None_both.pdf}
-    \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
-    \label{fig:1d_log_power_spectrum_[0, 0.04]_None_both}
-\end{figure}
 
 To compare the performance of various models with each other, the Bayes factor $\mathcal{Z}$ can be computed. This is the ratio of two marginal likelihoods but since the log has been taking, the log of the Bayes factor is computed by taking the difference between the LML of two models: 
 

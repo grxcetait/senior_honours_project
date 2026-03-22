@@ -19,6 +19,13 @@ It can be seen that the pixels corresponding to these low $k$ values in the midd
 
 \subsubsection{1D Power Spectrum}
 
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=1\linewidth]{outputs/week9/1d_log_power_spectrum_[0, 0.04]_None_both.pdf}
+    \caption{The logarithmic 1D power spectrum of the HI signal with no foreground removal (blue) and the residual signal after foreground removal (red) using minimum thresholds of $k_\perp = 0.025$ and $k_\parallel = 0.1$.}
+    \label{fig:1d_log_power_spectrum_[0, 0.04]_None_both}
+\end{figure}
+
 The spherically averaged 1D power spectrum with the true HI signal and the clean before and after applying the minimum $k$ thresholds can be seen in \Cref{fig:1d_log_power_spectrum_None_None}. Prior to applying the minimum thresholds, the residual signal follows the true HI signal at large $k$ but shows a clear deviation at low $k$, consistent with the signal loss identified in the cylindrical power spectrum ratio panel.
 
 After applying the thresholds, the residual signal shows a  stronger agreement with the 21\,cm signal across the whole $k$ range, with the two curves lying within each other's error bars for $k \gtrsim 0.4$/,Mpc$^{-1}$. This suggests that PCA is effective at recovering the small-scale fluctuations of the 21\,cm signal where foreground contamination is minimal. At lower $k$ values $k \lesssim 0.4$/,Mpc$^{-1}$, a small but systematic excess above the true HI signal persists, indicating that residual foreground power remains even after threshold application. This suggests that this subtraction does not achieve complete foreground removal around the region of the threshold boundary, consistent with the gradual rather than sharp transition seen in the cylindrical power spectrum ratio panel.
