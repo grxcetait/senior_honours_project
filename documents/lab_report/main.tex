@@ -5,6 +5,7 @@
 ]{LTJournalArticle}
 
 \usepackage{subfig}
+\usepackage{amssymb} 
 \usepackage{amsmath}
 \usepackage{stfloats}
 \usepackage[final]{hyperref}
@@ -48,7 +49,7 @@
 %
 %                       Insert your abstract HERE                
 \begin{abstract}
-        Neutral hydrogen (HI) 21\,cm intensity mapping is a promising probe of the large-scale structure of the Universe, but is contaminated by foreground emission several orders of magnitude brighter than the cosmological signal. This work compares Principal Component Analysis (PCA) and Gaussian Process Regression (GPR) for foreground removal methods in simulated 21\,cm intensity mapping. PCA successfully recovered the HI power spectrum after removing three principal components, with residuals consistent with the true signal after applying minimum mode thresholds of $k_{\perp}$ = 0.1\,Mpc$^{-1}$ and $k_{\parallel}$ = 0.1\,Mpc$^{-1}$. GPR, using an exponential kernel for the HI signal and a spectral-index-modified RBF kernel for the foreground, yielded incomplete foreground removal due to poorly constrained foreground hyperparameters. While PCA outperforms GPR for this idealised simulation by leveraging the statistical structure in the data, GPR's ability to propagate uncertainties and incorporate physical priors may be a valuable asset for next-generation surveys with MeerKAT.
+        Neutral hydrogen (HI) 21\,cm intensity mapping is a promising probe of the large-scale structure of the Universe, but is contaminated by foreground emission several orders of magnitude brighter than the cosmological signal. This work compares Principal Component Analysis (PCA) and Gaussian Process Regression (GPR) for foreground removal methods in simulated 21\,cm intensity mapping. PCA successfully recovered the HI power spectrum after removing three principal components, with the residual signal lying within the 1$\sigma$ uncertainties of the true HI signal across the full $k$ range after applying a minimum threshold of $k_{\parallel} = 0.4$\,Mpc$^{-1}$. GPR modelled the HI signal with an exponential kernel and the foreground with a spectral-index-modified RBF kernel, with hyperparameters constrained via MCMC sampling, recovering the HI signal well at high $k$ but providing an incomplete foreground removal at low $k$. While PCA outperforms GPR for this idealised simulation by leveraging the statistical structure in the data, GPR's ability to propagate uncertainties and incorporate physical priors may be a valuable asset for next-generation surveys with MeerKAT.
 \end{abstract}
 
 \vspace*{1cm}
@@ -95,6 +96,7 @@
 \input{documents/lab_report/sections/05_results}
 %\input{documents/lab_report/sections/06_discussion}
 \input{documents/lab_report/sections/07_conclusion}
+\input{documents/lab_report/sections/acknowledgements}
 
 %------------------------------------------------
 
