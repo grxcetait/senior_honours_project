@@ -159,19 +159,53 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[
-    backend=bibtex, % Use the bibtex backend for compiling the bibliography
-    style=authoryear, % In-text citation style
-    giveninits=true, % Use initials instead of full first names
-    maxnames=3, % Maximum number of names to display
-    minnames=1, % Minimum number of names to display
-    url=false % Don't display URLs in bibliography
-    sorting=none
+    style=authoryear, 
+    natbib=true, 
+    backend=biber, 
+    giveninits=true,     % Use initials
+    uniquename=false, 
+    maxcitenames=2,      % For (Author et al. 2024) citations
+    maxbibnames=8,       % How many authors to show in list before "et al."
+    terseinits=true,     % Removes periods from initials (Bailey S)
+    isbn=false, 
+    url=false,           % Hides URL
+    doi=false,           % Hides DOI
+    eprint=false,        % Hides arXiv links
+    date=year            % Shows only the year
 ]{biblatex}
 
-\DeclareNameAlias{sortname}{family-given} % Ensures all names are Lastname First
-\DeclareNameAlias{default}{family-given-initials} % Ensures initials are used
+% 1. Remove the comma between Surname and Initials (Bailey S)
+\DeclareNameAlias{sortname}{family-given}
+\renewcommand*{\revsdnamepunct}{}
 
-\addbibresource{documents/references.bib} % Add the bibliography resource file
+% 2. Remove "In:" for journals
+\renewbibmacro{in:}{}
+
+% 3. Remove Article Titles
+\DeclareFieldFormat[article,periodical]{title}{}
+
+% 4. Bold the Volume and remove Issue numbers
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\AtEveryBibitem{\clearfield{number}}
+
+% 5. Remove parentheses around the year and place it correctly
+\setunitpunct{\addcomma\space} % Use commas between blocks
+\DeclareFieldFormat{date}{#1} % No parentheses
+\renewbibmacro*{date+extrayear}{%
+    \printfield{date}%
+    \printfield{extrayear}}
+
+% 6. Remove "pp." from pages
+\DeclareFieldFormat{pages}{#1}
+
+% 7. Adjust the order (Author Year, Journal, Vol, Pages)
+\DeclareLabeldate{%
+  \field{date}
+  \field{year}
+  \field{eventdate}
+  \field{origdate}
+}
+\addbibresource{documents/references.bib}
 
 %----------------------------------------------------------------------------------------
 %	LINKS
