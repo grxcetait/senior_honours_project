@@ -162,49 +162,43 @@
     style=authoryear, 
     natbib=true, 
     backend=biber, 
-    giveninits=true,     % Use initials
+    giveninits=true, 
+    terseinits=true, 
     uniquename=false, 
-    maxcitenames=2,      % For (Author et al. 2024) citations
-    maxbibnames=8,       % How many authors to show in list before "et al."
-    terseinits=true,     % Removes periods from initials (Bailey S)
+    maxcitenames=2, 
+    maxbibnames=4,      % Forces "et al." after 4 authors for consistency
     isbn=false, 
-    url=false,           % Hides URL
-    doi=false,           % Hides DOI
-    eprint=false,        % Hides arXiv links
-    date=year            % Shows only the year
+    url=false, 
+    doi=false, 
+    eprint=false, 
+    date=year
 ]{biblatex}
 
-% 1. Remove the comma between Surname and Initials (Bailey S)
-\DeclareNameAlias{sortname}{family-given}
-\renewcommand*{\revsdnamepunct}{}
-
-% 2. Remove "In:" for journals
+% 1. Remove "In:" and Article Titles (Strict Alonso Style)
 \renewbibmacro{in:}{}
+\DeclareFieldFormat[article,periodical,inproceedings]{title}{}
 
-% 3. Remove Article Titles
-\DeclareFieldFormat[article,periodical]{title}{}
-
-% 4. Bold the Volume and remove Issue numbers
+% 2. Bold the Volume and remove issue number
 \DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
 \AtEveryBibitem{\clearfield{number}}
 
-% 5. Remove parentheses around the year and place it correctly
-\setunitpunct{\addcomma\space} % Use commas between blocks
-\DeclareFieldFormat{date}{#1} % No parentheses
-\renewbibmacro*{date+extrayear}{%
-    \printfield{date}%
-    \printfield{extrayear}}
-
-% 6. Remove "pp." from pages
+% 3. Format Pages: REMOVE "p." and "pp."
 \DeclareFieldFormat{pages}{#1}
 
-% 7. Adjust the order (Author Year, Journal, Vol, Pages)
-\DeclareLabeldate{%
-  \field{date}
-  \field{year}
-  \field{eventdate}
-  \field{origdate}
-}
+% 4. Formatting Names: No comma between Lastname and Initials
+\DeclareNameAlias{sortname}{family-given}
+\renewcommand*{\revsdnamepunct}{}
+
+% 5. THE YEAR: Remove parentheses, add commas
+\setunitpunct{\addcomma\space}
+\DeclareFieldFormat{date}{#1}
+\renewbibmacro*{date+extrayear}{%
+    \printunit{\addcomma\space}%
+    \printfield{labelyear}%
+    \printfield{extrayear}}
+    
+% 6. Remove periods after the year
+\renewcommand*{\labelnamepunct}{\addcomma\space}
 \addbibresource{documents/references.bib}
 
 %----------------------------------------------------------------------------------------
