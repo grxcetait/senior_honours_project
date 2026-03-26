@@ -165,41 +165,33 @@
     giveninits=true, 
     terseinits=true, 
     uniquename=false, 
-    maxcitenames=2, 
-    maxbibnames=4,      % Forces "et al." after 4 authors for consistency
+    maxcitenames=1, 
+    maxbibnames=1,     
     isbn=false, 
     url=false, 
     doi=false, 
     eprint=false, 
+    urldate=false,
     date=year
 ]{biblatex}
 
-% 1. Remove "In:" and Article Titles (Strict Alonso Style)
+% 1. Remove "In:" and Article Titles
 \renewbibmacro{in:}{}
-\DeclareFieldFormat[article,periodical,inproceedings]{title}{}
+\DeclareFieldFormat[article]{title}{}
 
-% 2. Bold the Volume and remove issue number
-\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
-\AtEveryBibitem{\clearfield{number}}
-
-% 3. Format Pages: REMOVE "p." and "pp."
-\DeclareFieldFormat{pages}{#1}
-
-% 4. Formatting Names: No comma between Lastname and Initials
+% 2. Remove comma between Surname and Initials (Alonso D)
 \DeclareNameAlias{sortname}{family-given}
 \renewcommand*{\revsdnamepunct}{}
 
-% 5. THE YEAR: Remove parentheses, add commas
-\setunitpunct{\addcomma\space}
-\DeclareFieldFormat{date}{#1}
-\renewbibmacro*{date+extrayear}{%
-    \printunit{\addcomma\space}%
-    \printfield{labelyear}%
-    \printfield{extrayear}}
-    
-% 6. Remove periods after the year
-\renewcommand*{\labelnamepunct}{\addcomma\space}
-\addbibresource{documents/references.bib}
+% 3. Bold the Volume and remove "pp."
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\DeclareFieldFormat{pages}{#1}
+\AtEveryBibitem{\clearfield{number}}
+
+% 4. Use commas to separate Journal, Volume, and Pages
+\renewcommand*{\newunitpunct}{\addcomma\space}
+
+\addbibresource{documents/newreferences.bib}
 
 %----------------------------------------------------------------------------------------
 %	LINKS

@@ -9,16 +9,16 @@ The performance of the PCA foreground removal was evaluated by comparing the rec
 
 \subsubsection{Foreground Principal Components}
 
-The choice of $N_{FG} = 3$ was decided based on inspection of the eigenvectors and eigenvalues. This choice of $N_{FG}$ components involves a trade-off where too few components leave residual foreground, while too many risk subtracting the genuine HI signal. The first three modes captured the foreground-dominated variance while the remaining modes were consistent with the cosmological signal. 
+%The choice of $N_{FG} = 3$ was decided based on inspection of the eigenvectors and eigenvalues. This choice of $N_{FG}$ components involves a trade-off where too few components leave residual foreground, while too many risk subtracting the genuine HI signal. The first three modes captured the foreground-dominated variance while the remaining modes were consistent with the cosmological signal. 
 
 % [1] https://arxiv.org/pdf/2105.12665
-The choice of $N_{FG} = 3$ is much lower than what was used in \cite{soaresGaussianProcessRegression2022}, who used $N_{FG} = 6$ and $N_{FG} = 7$. This is likely due to their more complex data, which includes instrumental noise, beam effects, and polarised foregrounds which are absent from this simulation; this analysis only considers the cosmological signal and the foreground. The results suggests that three components is a reasonable choice for this simulation, though a more rigorous approach could be taken which involves cross-validating the choice of $N_{FG}$ against the recovered power spectrum as a function of component number. 
+The choice of $N_{FG} = 3$ is much lower than what was used in \cite{soaresGaussianProcessRegression2022}, who used $N_{FG} = 6$ and $N_{FG} = 7$. This is likely due to their more complex data including instrumental noise, beam effects, and polarised foregrounds which are absent from this simulation; this analysis only considers the cosmological signal and the foreground. The results suggests that three components is a reasonable choice for this simulation, though a more rigorous approach could be taken which involves cross-validating the choice of $N_{FG}$ against the recovered power spectrum as a function of component number. 
 
 \subsubsection{Cylindrical Power Spectrum}
 
 The cylindrical power spectrum of the true HI power spectrum, the residual signal after PCA cleaning, and their ratio (see \Cref{fig:cylindrical_power_spectrum_None_None}) was used as an assessment of the foreground cleaning. The ratio panel provided the clearest diagnostic of the cleaning performance. 
 
-At high $k_{\parallel}$, the ratio is close to unity and uniformly red, indicating that the recovered signal is in good agreement with the true HI power spectrum in these modes. This is physically expected as high $k_{\parallel}$ modes correspond to small-scale structure along the line of sight that varies rapidly with frequency and is therefore largely orthogonal to the spectrally smooth foreground components removed by PCA. 
+At high $k_{\parallel}$, the ratio is close to unity and uniformly red, indicating that the recovered signal is in good agreement with the true HI power spectrum in these modes. This is physically expected as high $k_{\parallel}$ modes correspond to small-scale structure along the line-of-sight that varies rapidly with frequency and is therefore largely orthogonal to the spectrally smooth foreground components removed by PCA. 
 
 % [1] https://academic.oup.com/mnras/article/446/4/3545/2891891
 % [2] https://iopscience.iop.org/article/10.1086/668105/pdf#:~:text=This%20work%20was%20originally%20developed%20for%20PCA,underlying%20methodology%20is%20specific%20to%20astronomical%20spectra.
@@ -26,14 +26,14 @@ At high $k_{\parallel}$, the ratio is close to unity and uniformly red, indicati
 % [4] https://arxiv.org/pdf/2407.21626
 However, at low $k_{\parallel}$, the ratio drops below unity, indicating significant signal loss. Here, the 21\,cm signal shares spectral structure with the foregrounds and cannot be cleanly separated by PCA. This inevitably removes some genuine HI signal alongside the foreground components, a known limitation of blind component separation techniques (\cite{delchambreWeightedPrincipalComponent2015a}, \cite{baileyPrincipalComponentAnalysis2012b}). This signal loss at low $k_{\parallel}$ is consistent with findings in \cite{mertensStatistical21cmSignal2018} and \cite{collaborationMeerKLASSLbandDeepfield2025a}, who report the same characteristic suppression of modes at low $k_{\parallel}$ from PCA cleaning. 
 
-Through inspection of the ratio panel, a minimum threshold of $k_\parallel = 0.4$\,Mpc$^{-1}$ was defined and the foreground cleaning was redone excluding modes below these values. Thresholds with values below this were found to still exhibit cosmological signal loss, while thresholds above this value also closely match the true HI signal. The chosen threshold therefore represents the smallest value which maximised foreground cleaning while minimising cosmological signal loss.
+Through inspection of the ratio panel, a minimum threshold of $k_\parallel = 0.3$\,Mpc$^{-1}$ was defined and the foreground cleaning was redone excluding modes below these values. Thresholds with values below this were found to still exhibit cosmological signal loss, while thresholds above this value also closely match the true HI signal. The chosen threshold therefore represents the smallest value which maximised foreground cleaning and minimised cosmological signal loss.
 
 \subsubsection{1D Power Spectrum}
 
 \begin{figure}[t!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week9/1d_log_power_spectrum_[0, 0.04]_None_both.pdf}
-    \caption{The logarithmic spherically averaged 1D power spectrum from of the HI signal with no foreground removal (black), and the residual signal after PCA foreground removal without any minimum thresholds applied (blue) and the residual signal after PCA foreground removal with minimum thresholds of $k_\parallel = 0.4$\,Mpc$^{-1}$ (red). This was run for 100 realisations with the mean used as the datapoints and the standard deviation used as the error bars.}
+    \caption{The logarithmic spherically averaged 1D power spectrum from of the HI signal with no foreground removal (black), and the residual signal after PCA foreground removal without any minimum thresholds applied (blue) and the residual signal after PCA foreground removal with minimum thresholds of $k_\parallel = 0.3$\,Mpc$^{-1}$ (red). This was run for 100 realisations with the mean used as the datapoints and the standard deviation used as the error bars.}
     \label{fig:1d_log_power_spectrum_0_0.04_None_both}
 \end{figure}
 
@@ -41,23 +41,23 @@ The spherically averaged 1D power spectrum with the true HI signal and the resid
 
 Prior to applying the minimum thresholds, the residual signal (blue dashed line) follows the true HI signal (black line) at large $k$ but shows a clear deviation at low $k$, consistent with the signal loss identified in the cylindrical power spectrum ratio panel. This deviation arises because PCA removes some genuine cosmological signal alongside the foreground components at these scales.
 
-After applying the minimum thresholds of and $k_\parallel = 0.4$\,Mpc$^{-1}$, the residual signal (red dashed line) shows a stronger agreement with the true HI signal across the full $k$ range, lying within 1$\sigma$ of the HI signal throughout. The error bars are approximately uniform in size at large $k$ but grow larger towards lower $k$, particularly for the threshold residual signal. This is expected and represents the increased variance in the residual signal at the scales most affected by foreground cleaning.
+After applying the minimum thresholds of $k_\parallel = 0.3$\,Mpc$^{-1}$, the residual signal (red dashed line) shows a stronger agreement with the true HI signal across the full $k$ range, lying within 1$\sigma$ of the HI signal throughout. The error bars are approximately uniform in size at large $k$ but grow larger towards lower $k$, particularly for the threshold residual signal. This is expected and represents the increased variance in the residual signal at the scales most affected by foreground cleaning.
 
-It is also important to note that the residual signal with thresholds does not extend all the way to $k = 0$\,Mpc$^{-1}$, as modes below the threshold are completely excluded from the analysis. While the recovered signal agrees well with the true Hi signal within the defined $k$ ranges, this represents a genuine loss of cosmological information at large scales.
+It is also important to note that the residual signal with thresholds does not extend all the way to $k = 0$\,Mpc$^{-1}$, as modes below the threshold are completely excluded from the analysis. While the recovered signal agrees well with the true HI signal within the defined $k$ ranges, this represents a genuine loss of cosmological information at large scales.
 
 \subsubsection{Overall Performance}
 
-Overall, PCA foreground removal performs well within the defined $k$ thresholds, recovering the HI power spectrum throughout the full $k$ range above $k_{\parallel} = 0.4$\,Mpc$^{-1}$. The primary limitation is the signal loss at low $k_{\parallel}$, which is a consequences of the foreground and HI signal share spectral structure at these scale. 
+Overall, PCA foreground removal performs well within the defined $k$ thresholds, recovering the HI power spectrum throughout the full $k$ range above $k_{\parallel} = 0.3$\,Mpc$^{-1}$. The primary limitation is the signal loss at low $k_{\parallel}$, which is a consequences of the foreground and HI signal sharing spectral structure at these scale. 
 
 This analysis represents an idealised scenario where the foreground model assumes a single uniform spectral index across the sky, whereas real foreground have spatially varying spectral indices which would introduce additional mode coupling and make PCA separation more difficult. 
 
 % [1] https://iopscience.iop.org/article/10.1088/2041-8205/763/1/L20
 % [2] https://iopscience.iop.org/article/10.1088/0004-637X/815/1/51
-In the case of more complex data more representative of real observations, a transfer function could be considered as an alternative to applying minimum $k$ thresholds (\cite{masuiMEASUREMENT21Cm2013}, \cite{switzerINTERPRETINGUNRESOLVEDINTENSITY2015}). Rather than excluding contaminated modes entirely, a transfer function corrects for signal loss at each $k$ by dividing the cleaned power spectrum by the fraction of the Hi signal retained after cleaning, estimated from the simulations where the true signal is known. 
+In the case of data more representative of real observations, a transfer function could be considered as an alternative to applying minimum $k$ thresholds (\cite{masuiMEASUREMENT21Cm2013}, \cite{switzerINTERPRETINGUNRESOLVEDINTENSITY2015}). Rather than excluding contaminated modes entirely, a transfer function corrects for signal loss at each $k$ by dividing the cleaned power spectrum by the fraction of the HI signal retained after cleaning, estimated from the simulations where the true signal is known. 
 
-This analysis would be much more difficult is a more realistic dataset were used or if a more realistic foreground model were used. The foreground signal used in this analysis assumes a single spectral index across the sky, whereas real foregrounds have spatially varying indices which would make PCA separation more difficult.
+This analysis would be much more difficult if a more realistic dataset were used or if a more realistic foreground model were used. The foreground signal used in this analysis assumes a single spectral index across the sky, whereas real foregrounds have spatially varying indices which would make PCA separation more difficult.
 
-This preserves cosmological information at low $k_{\parallel}$ that would otherwise be discarded. However, the correction also amplifies any residual foreground contamination or noise present at those modes alongside the HI signal. In this analysis, given that the foreground residuals at low $K_{\parallel}$ are significant, applying a transfer function correction would amplify both the HI signal and the foreground contamination simultaneously. The $k$ threshold approach is therefore the more conservative and ppropriate choice for this dataset, though a transfer function would become the preferred approach as the quality of foreground removal improves.
+This preserves cosmological information at low $k_{\parallel}$ that would otherwise be discarded. However, the correction also amplifies any residual foreground contamination or noise present at those modes alongside the HI signal. In this analysis, given that the foreground residuals at low $k_{\parallel}$ are significant, applying a transfer function correction would amplify both the HI signal and the foreground contamination simultaneously. The $k$ threshold approach is therefore the more conservative and appropriate choice for this dataset, though a transfer function would become the preferred approach as the quality of foreground removal improves.
 
 % [1] https://iopscience.iop.org/article/10.1088/2041-8205/763/1/L20
 % [2] https://iopscience.iop.org/article/10.1088/0004-637X/815/1/51
@@ -81,11 +81,11 @@ This preserves cosmological information at low $k_{\parallel}$ that would otherw
     \label{fig:mcmc_chain_with_sp_indx_fg_no_noise}
 \end{figure*}
 
-Here, we will discuss the results of foreground removal using GPR. While previous studies including \cite{kernGaussianProcessForeground2020} and \cite{mertensImprovedUpperLimits2020} model the foreground with the standard RBF kernel, this work introduces the spectral-index-modified RBF kernel (\Cref{eq:RBF_sp_indx}) which allows the foreground amplitude to scale as a power law with frequency, physically motivated by the known spectral behaviour of synchrotron emission.
+Here, we will discuss the results of foreground removal using GPR. While previous studies including \cite{kernGaussianProcessForeground2020}, \cite{mertensImprovedUpperLimits2020}, and \cite{soaresGaussianProcessRegression2022} model the foreground with the standard RBF kernel, this work introduces the spectral-index-modified RBF kernel (\Cref{eq:RBF_sp_indx}) which allows the foreground amplitude to scale as a power law with frequency, physically motivated by the known spectral behaviour of synchrotron emission.
 
 Different combinations of the kernels functions with different initial guesses, bounds, and optimisation algorithms were tested and their LMLs compared to find the one which best fit the data. The exponential function (\Cref{eq:exp}) was found to fit the 21\,cm signal the best in all cases. Additionally, the spectral index modified RBF kernel (\Cref{eq:RBF_sp_indx}) performed the best in comparison to the normal RBF kernel (\Cref{eq:RBF}), as expected as it better models the smooth foregrounds (see \Cref{fig:rbf_kernel_w_sp_indx_vs_foreground_covariance}). 
 
-First, the hyperparameter estimations from MCMC sampling will be discussed, along with an assessment of the chain convergence. Then, the results from the foreground removal, which is the 1D and cylindrical power spectrum, will be presented, followed by an evaluation of the overall GPR performance.
+First, the hyperparameter estimations from MCMC sampling will be discussed, along with an assessment of the chain convergence. Then, the resulting power spectra from the foreground removal will be presented, followed by an evaluation of the overall GPR performance.
 
 \subsubsection{Hyperparameter Estimation}
 
@@ -109,7 +109,7 @@ First, the hyperparameter estimations from MCMC sampling will be discussed, alon
 \begin{figure*}[t!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week8/kernel_comparison_mcmc_with_sp_indx_no_noise.pdf}
-    \caption{Comparison of the fitted GPR kernels against the true component covariances. From left to right: the fitted HI kernel (exponential), the true HI covariance, the fitted HI kernel (spectral-index-modified RBF), and the true foreground covariance.}
+    \caption{Comparison of the fitted GPR kernels against the true component covariances. From left to right: the fitted HI kernel (exponential), the true HI covariance, the fitted foreground kernel (spectral-index-modified RBF), and the true foreground covariance.}
     \label{fig:kernel_comparison_mcmc_with_sp_indx_no_noise}
 \end{figure*}
 
@@ -121,7 +121,7 @@ The recovered HI lengthscale $l_{HI}$ is moderately constrained, though the post
 
 The foreground amplitude $\sigma_{fg}$ is considerably less well constrained with a broad and asymmetric posterior. This reflects a degeneracy in the foreground model where the observed total covariance can be reported by different combinations of amplitude and lengthscale, making it difficult to constrain these parameters independently. 
 
-The foreground lengthscale $l_{fg}$ has a particularly large and asymmetric uncertainty. The posterior rises steeply and has a long tail towards higher values, suggesting the data is consistent with a wide range of $l_{fg}$. $l_{fg}$ consistently approached the upper bound of the prior across all optimisation attempts regardless of initial guesses or bound choices. Physically, this large $l_{fg}$ corresponds to foreground emissions that is highly correlated in frequency and, therefore, very smooth. This is consistent with what we expect with synchrotron-dominated foregrounds. However, the poor constraint indicates that the frequency range used may be insufficient to fully characterise $l_{fg}$. A wider bandwidth may be beneficial to characterise $l_{fg}$ reliably.
+The foreground lengthscale $l_{fg}$ has a particularly large and asymmetric uncertainty. The posterior rises steeply and has a long tail towards higher values, suggesting the data is consistent with a wide range of $l_{fg}$. $l_{fg}$ consistently approached the upper bound of the prior across all optimisation attempts regardless of initial guesses or bound choices. Physically, this large $l_{fg}$ corresponds to foreground emissions that is highly correlated in frequency and therefore very smooth. This is consistent with what we expect with synchrotron-dominated foregrounds. However, the poor constraint indicates that the frequency range used may be insufficient to fully characterise $l_{fg}$. A wider bandwidth may be beneficial to characterise $l_{fg}$ reliably.
 
 Finally, the foreground spectral index $\gamma$ is recovered with a broad posterior. The injected true value of -2.7 lies within the 1$\sigma$ credible interval, confirming the model is recovering physically consistent spectral behaviour despite the large uncertainty. The broad posterior is consistent with the difficulty of constraining the spectral shape over a narrow frequency range. The diffuse joint posterior between $l_{fg}$ and $\gamma$ in \Cref{fig:final_corner_plot_values} confirms a further degeneracy where a larger spectral index combined with a longer length scale can produce a similar foreground covariance structure to a smaller spectral index with a shorter length scale. This degeneracy makes these parameters difficult to constrain independently.
 
@@ -133,12 +133,12 @@ All five hyperparameters show good mixing across all walkers, with no systematic
 
 \begin{figure*}[t!]
     \centering
-    \includegraphics[width=1\linewidth]{outputs/week9/gpr_cylindrical_scipy_with_no_noise_and_sp_indx.pdf}
+    \includegraphics[width=1\linewidth]{outputs/week8/gpr_cylindrical_mcmc_with_sp_indx_no_noise.pdf}
     \caption{The cylindrical power spectra for the GPR foreground cleaning method, with the HI signal, the residual total signal (HI signal and foreground) after foreground removal, and the ratio between residual and the HI signal, from left to right.}
     \label{fig:gpr_cylindrical_scipy_with_no_noise_and_sp_indx}
 \end{figure*}
 
-\begin{figure}
+\begin{figure}[hbt!]
     \centering
     \includegraphics[width=1\linewidth]{outputs/week9/final_power_spectrum_1.pdf}
     \caption{The logarithmic spherically averaged 1D power spectrum from of the HI signal with no foreground removal (black), and the residual signal after GPR foreground removal (red). This was run for 1,000 realisation from the MCMC samples, where the datapoints are the median values and the 16th and 84th percentiles were used as the error bars for the residual signal.}
@@ -159,10 +159,10 @@ It is important to note the error bars on the residual signal represent the 1$\s
 
 \subsubsection{Overall Performance}
 
-The GPR foreground removal demonstrates partial but incomplete recovery of the HI power spectrum. The method successfully removed the bulk of the foreground contamination at high $k$ ($k \gtrsim 0.4$\,Mpc$^{-1}$), where the residual signal closely follows the true HI power spectrum. However, significant foreground residuals persist at low $k$, where the recovered power spectrum exceeds the true HI signal by 3-4 orders of magnitude. This incomplete removal is primarily attributed to the degeneracy between the foreground amplitude $\sigma_{fg}$ and length scale $l_{fg}$, which resulted in the fitted foreground kernel underestimating the true foreground covariance amplitude by approximately a factor of two. Despite this, the HI amplitude $\sigma_{HI}$ is well recovered and spectral index $\gamma$ is consistent with the injected value of -2.7. 
+The GPR foreground removal demonstrates incomplete recovery of the HI power spectrum. The method successfully removed the bulk of the foreground contamination at high $k$ ($k \gtrsim 0.4$\,Mpc$^{-1}$), where the residual signal closely follows the true HI power spectrum. However, significant foreground residuals persist at low $k$, where the recovered power spectrum exceeds the true HI signal by 3-4 orders of magnitude. This incomplete removal is primarily attributed to the degeneracy between the foreground amplitude $\sigma_{fg}$ and length scale $l_{fg}$, which resulted in the fitted foreground kernel underestimating the true foreground covariance amplitude by approximately a factor of two. Despite this, the HI amplitude $\sigma_{HI}$ is well recovered and spectral index $\gamma$ is consistent with the injected value of -2.7. 
 
-The uncertainty quantification presented here reflects only hyperparameter uncertainty from a single sky realisation. Running MCMC across 100 independent realisations, as done for PCA, would additionally cpature cosmic variance and provide a fairer comparison for the uncertainty estimate between the two methods.
+The uncertainty quantification presented here reflects only hyperparameter uncertainty from a single sky realisation. Running MCMC across 100 independent realisations, as done for PCA, would additionally capture cosmic variance and provide a fairer comparison for the uncertainty estimate between the two methods.
 
 % [1] https://academic.oup.com/mnras/article/500/2/2264/5979792
 % [2] https://arxiv.org/pdf/2105.12665
-Additionally, a larger frequency range may be beneficial to improve on the hyperparameter constraints if there is more frequency information to learn from since GPR uses frequency data. While \cite{hothiComparingForegroundRemoval2021} found that GPR performed worse with a larger frequency range, \cite{soaresGaussianProcessRegression2022} found that GPR performed better with a smaller and lower frequency range, and performed worse with smaller and higher frequency range. This worse performance with the smaller and higher frequency range was due to their foreground amplitude $\sigma_{fg}$.
+Additionally, a larger frequency range may be beneficial to improve on the hyperparameter constraints if there is more frequency information to learn from since GPR uses frequency data. While \cite{hothiComparingForegroundRemoval2021} found that GPR performed worse with a larger frequency range, \cite{soaresGaussianProcessRegression2022} found that GPR performed better with a smaller and lower frequency range, and performed worse with smaller and higher frequency range. This worse performance with the smaller and higher frequency range was due to their foreground amplitude $\sigma_{fg}$ differing between the two cases.
