@@ -1,0 +1,23 @@
+# GitHub-only packages (not on PyPI)
+git+https://github.com/zhaotingchen/meer21cm.git
+git+https://github.com/ska-sa/katbeam.git
+git+https://github.com/telegraphic/pygdsm.git
+
+# Core scientific packages
+numpy==1.26.4
+scipy==1.12.0
+matplotlib==3.10.8
+astropy==6.1.7
+healpy==1.19.0
+
+# Foreground removal / GP
+GPy==1.13.2
+emcee==3.1.6
+nautilus-sampler==1.0.6
+
+# HI modelling
+halomod==2.2.2
+pysm3==3.4.3
+
+# Notebooks
+jupyterlab
